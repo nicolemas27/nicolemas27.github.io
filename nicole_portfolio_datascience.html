@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Nicole Mascarenhas — Data Scientist & AI Engineer. MSc Data Science, University of Manchester."/>
+<title>Nicole Mascarenhas — Data Scientist & AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06080f;
+  --bg2:#0a0d16;
+  --surface:#0f1420;
+  --surface2:#141a28;
+  --border:#1e2a3e;
+  --border2:#2a3a55;
+  --text:#e8edf8;
+  --text2:#8a9bbf;
+  --text3:#4a5a78;
+  --ink:#c8d4ee;
+  --gold:#e8b86d;
+  --teal:#4ecdc4;
+  --blue:#5b8dee;
+  --coral:#f07878;
+  --green:#58d68d;
+  --purple:#b39ddb;
+  --font-serif:'Instrument Serif',Georgia,serif;
+  --font-body:'Outfit',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;cursor:none;}
+
+/* cursor */
+#cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;}
+#cursor-ring{position:fixed;width:28px;height:28px;border:1.5px solid rgba(232,184,109,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s ease;}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(6,8,15,.88);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.04);}
+.nav-logo{font-family:var(--font-serif);font-size:1.3rem;color:var(--text);text-decoration:none;}
+.nav-logo em{color:var(--gold);font-style:normal;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);text-decoration:none;transition:color .2s;font-weight:500;}
+.nav-links a:hover{color:var(--gold);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.nav-status{display:flex;align-items:center;gap:.45rem;font-size:.7rem;font-family:var(--font-mono);color:var(--text3);}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2.5s ease-in-out infinite;box-shadow:0 0 6px var(--green);}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+#nav-toggle{display:none;background:none;border:none;cursor:none;flex-direction:column;gap:5px;padding:4px;}
+#nav-toggle span{display:block;width:22px;height:1.5px;background:var(--text2);transition:all .25s;}
+
+/* hero */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:7rem 0 5rem;overflow:hidden;}
+.hero-bg-visual{position:absolute;inset:0;overflow:hidden;}
+.hero-bg-visual svg{width:100%;height:100%;opacity:.18;}
+.hero-content{position:relative;z-index:1;padding:0 3rem;max-width:900px;}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.72rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.25rem;opacity:0;animation:slideUp .6s .3s forwards;display:flex;align-items:center;gap:.75rem;}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);}
+.hero-name{font-family:var(--font-serif);font-size:clamp(3.4rem,7vw,7rem);line-height:1;letter-spacing:-.03em;margin-bottom:1.75rem;opacity:0;animation:slideUp .7s .45s forwards;}
+.hero-name .last{display:block;background:linear-gradient(120deg,var(--gold),#f4d08a,var(--coral));background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 8s ease infinite;}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero-desc{font-size:clamp(1rem,1.8vw,1.2rem);color:var(--ink);max-width:580px;line-height:1.8;margin-bottom:2.5rem;font-weight:300;opacity:0;animation:slideUp .7s .6s forwards;}
+.hero-desc strong{color:var(--text);font-weight:500;}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;opacity:0;animation:slideUp .7s .75s forwards;}
+.btn-primary{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 2.2rem;background:var(--gold);color:#060a10;font-weight:600;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:none;cursor:none;transition:all .25s;border-radius:2px;}
+.btn-primary:hover{background:#f0c878;transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,184,109,.3);}
+.btn-ghost{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 2.2rem;background:transparent;color:var(--text);font-weight:500;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1px solid var(--border2);cursor:none;transition:all .25s;border-radius:2px;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.hero-chips{display:flex;flex-wrap:wrap;gap:.65rem;opacity:0;animation:slideUp .7s .9s forwards;}
+.hero-chip{font-family:var(--font-mono);font-size:.65rem;color:var(--text3);letter-spacing:.08em;display:flex;align-items:center;gap:.4rem;}
+.hero-chip::before{content:'—';opacity:.4;}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* sections shared */
+section{position:relative;z-index:1;padding:7rem 3rem;}
+.section-kicker{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.65rem;margin-bottom:1rem;}
+.section-kicker::before{content:'';width:20px;height:1px;background:var(--gold);}
+.section-title{font-family:var(--font-serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:400;letter-spacing:-.025em;line-height:1.05;margin-bottom:1.25rem;}
+.section-sub{color:var(--text2);font-size:1rem;max-width:540px;line-height:1.8;font-weight:300;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* about */
+#about{background:var(--bg2);border-top:1px solid var(--border);}
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:6rem;margin-top:4rem;align-items:start;}
+.about-story p{color:var(--ink);line-height:1.9;font-size:.98rem;font-weight:300;margin-bottom:1.5rem;}
+.about-story p strong{color:var(--text);font-weight:500;}
+.about-story p em{color:var(--gold);font-style:italic;font-family:var(--font-serif);font-size:1.05em;}
+.fact-stack{display:flex;flex-direction:column;gap:1rem;}
+.fact-item{border:1px solid var(--border);background:var(--surface);padding:1.25rem 1.5rem;border-radius:4px;position:relative;overflow:hidden;transition:border-color .25s;}
+.fact-item:hover{border-color:var(--border2);}
+.fact-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);opacity:.6;}
+.fact-num{font-family:var(--font-serif);font-size:2.2rem;color:var(--gold);line-height:1;margin-bottom:.2rem;}
+.fact-label{font-size:.75rem;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;}
+.fact-desc{font-size:.85rem;color:var(--text2);margin-top:.35rem;line-height:1.5;font-weight:300;}
+.scholarship-strip{margin-top:1.25rem;border:1px solid rgba(232,184,109,.2);background:linear-gradient(135deg,rgba(232,184,109,.04),rgba(244,208,138,.06));padding:1.25rem 1.5rem;border-radius:4px;display:flex;align-items:flex-start;gap:1rem;}
+.scholarship-icon{font-size:1.6rem;flex-shrink:0;margin-top:.1rem;}
+.scholarship-text strong{color:var(--gold);font-size:.95rem;display:block;margin-bottom:.3rem;}
+.scholarship-text p{color:var(--text2);font-size:.82rem;line-height:1.55;font-weight:300;}
+
+/* skills */
+#skills{background:var(--bg);}
+.skills-table{margin-top:4rem;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.skill-row{display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);transition:background .2s;}
+.skill-row:last-child{border-bottom:none;}
+.skill-row:hover{background:rgba(255,255,255,.015);}
+.skill-cat{padding:1.25rem 1.5rem;border-right:1px solid var(--border);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:flex-start;gap:.6rem;padding-top:1.4rem;font-weight:500;}
+.skill-cat .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:.05rem;}
+.sk-ml{color:var(--blue)}.sk-ml .dot{background:var(--blue);}
+.sk-nlp{color:var(--teal)}.sk-nlp .dot{background:var(--teal);}
+.sk-eng{color:var(--gold)}.sk-eng .dot{background:var(--gold);}
+.sk-viz{color:var(--coral)}.sk-viz .dot{background:var(--coral);}
+.sk-tools{color:var(--purple)}.sk-tools .dot{background:var(--purple);}
+.skill-tags-wrap{padding:1rem 1.25rem;display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center;}
+.stag{font-size:.72rem;font-family:var(--font-mono);padding:.28rem .6rem;border:1px solid var(--border);color:var(--text2);background:rgba(255,255,255,.02);border-radius:2px;transition:all .18s;}
+.stag.core{border-color:var(--border2);color:var(--text);background:var(--surface);}
+.skill-row:hover .stag.core{border-color:rgba(232,184,109,.35);color:var(--gold);}
+
+/* projects */
+#projects{background:var(--bg2);border-top:1px solid var(--border);}
+.projects-intro{margin-top:2rem;max-width:600px;}
+.projects-intro p{color:var(--ink);line-height:1.8;font-size:.97rem;font-weight:300;}
+.projects-filter{display:flex;gap:.6rem;flex-wrap:wrap;margin:3rem 0 2.5rem;}
+.filter-btn{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem 1rem;background:transparent;border:1px solid var(--border);color:var(--text3);cursor:none;transition:all .2s;border-radius:2px;}
+.filter-btn:hover,.filter-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(232,184,109,.06);}
+.featured-band{margin-bottom:3rem;}
+.featured-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem;}
+.featured-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.featured-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;}
+.projects-divider{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;}
+.projects-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem;}
+
+/* project card */
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all .3s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;}
+.project-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4);}
+
+/* card visual banner — SVG based, always works */
+.card-banner{
+  position:relative;height:150px;overflow:hidden;flex-shrink:0;
+}
+.card-banner svg{width:100%;height:100%;}
+.card-banner-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 20%,rgba(15,20,32,.98) 100%);
+}
+.card-type-badge{position:absolute;top:.85rem;left:.85rem;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .65rem;border-radius:2px;font-weight:500;}
+.card-type-badge.dissertation{background:rgba(91,141,238,.15);border:1px solid rgba(91,141,238,.4);color:var(--blue);}
+.card-type-badge.nlp{background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.35);color:var(--teal);}
+.card-type-badge.gen-ai{background:rgba(179,157,219,.1);border:1px solid rgba(179,157,219,.35);color:var(--purple);}
+.card-type-badge.ml{background:rgba(240,120,120,.1);border:1px solid rgba(240,120,120,.35);color:var(--coral);}
+.card-type-badge.dl{background:rgba(91,141,238,.1);border:1px solid rgba(91,141,238,.3);color:var(--blue);}
+.card-type-badge.fullstack{background:rgba(232,184,109,.1);border:1px solid rgba(232,184,109,.35);color:var(--gold);}
+.card-type-badge.data-eng{background:rgba(88,214,141,.1);border:1px solid rgba(88,214,141,.35);color:var(--green);}
+.card-type-badge.industry{background:rgba(232,184,109,.12);border:1px solid rgba(232,184,109,.4);color:var(--gold);}
+.card-type-badge.hackathon{background:rgba(240,120,120,.1);border:1px solid rgba(240,120,120,.3);color:var(--coral);}
+.card-year{position:absolute;bottom:.85rem;right:.85rem;font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.35);letter-spacing:.08em;}
+
+.card-body{padding:1.25rem 1.25rem 0;flex:1;display:flex;flex-direction:column;}
+.card-title{font-family:var(--font-serif);font-size:1.1rem;line-height:1.3;margin-bottom:.65rem;color:var(--text);font-weight:400;}
+.card-story{font-size:.87rem;color:var(--text2);line-height:1.75;font-weight:300;margin-bottom:.85rem;flex:1;}
+.card-impact{background:rgba(232,184,109,.05);border-left:2px solid rgba(232,184,109,.4);padding:.6rem .85rem;margin-bottom:1rem;border-radius:0 2px 2px 0;font-size:.78rem;color:rgba(232,184,109,.85);line-height:1.55;}
+.card-foot{padding:.85rem 1.25rem 1.25rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
+.card-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
+.tech-tag{font-size:.63rem;font-family:var(--font-mono);padding:.2rem .5rem;border:1px solid var(--border);color:var(--text3);border-radius:2px;}
+.card-links{display:flex;gap:.5rem;flex-shrink:0;}
+.card-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.7rem;font-family:var(--font-mono);color:var(--text3);text-decoration:none;padding:.3rem .6rem;border:1px solid var(--border);border-radius:2px;transition:all .2s;}
+.card-link:hover{color:var(--gold);border-color:var(--gold);}
+.card-link.live:hover{color:var(--green);border-color:var(--green);}
+.card-link svg{width:11px;height:11px;fill:currentColor;flex-shrink:0;}
+
+.project-card.featured-hero .card-banner{height:190px;}
+.project-card.featured-hero .card-title{font-size:1.2rem;}
+.project-card.featured-hero{border-color:rgba(232,184,109,.12);}
+
+/* experience */
+#experience{background:var(--bg);}
+.exp-grid{margin-top:4rem;display:flex;flex-direction:column;}
+.exp-item{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid var(--border);padding:2.5rem 0;}
+.exp-item:first-child{border-top:1px solid var(--border);}
+.exp-left{padding-right:2rem;}
+.exp-period{font-family:var(--font-mono);font-size:.68rem;color:var(--gold);letter-spacing:.08em;line-height:1.5;}
+.exp-role{font-family:var(--font-serif);font-size:1.2rem;margin-bottom:.35rem;font-weight:400;}
+.exp-org{font-size:.82rem;color:var(--text3);margin-bottom:1rem;font-family:var(--font-mono);letter-spacing:.05em;}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.65rem;}
+.exp-bullets li{font-size:.9rem;color:var(--ink);line-height:1.75;padding-left:1.25rem;position:relative;font-weight:300;}
+.exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--gold);opacity:.6;font-size:.8rem;}
+
+/* education */
+#education{background:var(--bg2);border-top:1px solid var(--border);}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:4rem;}
+.edu-card{border:1px solid var(--border);background:var(--surface);padding:2rem;border-radius:6px;position:relative;overflow:hidden;transition:border-color .25s;}
+.edu-card:hover{border-color:var(--border2);}
+.edu-card.featured{border-color:rgba(232,184,109,.2);}
+
+.edu-card-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.25rem;}
+.edu-logo{width:48px;height:48px;flex-shrink:0;border-radius:6px;background:#fff;padding:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.edu-logo img{width:100%;height:100%;object-fit:contain;}
+.edu-logo-text{flex:1;}
+.cert-card-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;}
+.exp-header{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:.85rem;}
+.exp-role-block{flex:1;}
+
+.edu-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal));}
+.edu-degree{font-family:var(--font-serif);font-size:1.15rem;margin-bottom:.5rem;line-height:1.35;font-weight:400;}
+.edu-school{font-size:.82rem;color:var(--gold);font-family:var(--font-mono);letter-spacing:.06em;margin-bottom:.35rem;}
+.edu-period{font-size:.77rem;color:var(--text3);font-family:var(--font-mono);margin-bottom:.85rem;}
+.edu-detail{font-size:.85rem;color:var(--ink);line-height:1.6;font-weight:300;margin-bottom:.65rem;}
+.edu-badge{display:inline-block;font-size:.72rem;padding:.3rem .75rem;border-radius:2px;background:rgba(232,184,109,.08);border:1px solid rgba(232,184,109,.2);color:var(--gold);font-family:var(--font-mono);}
+.awards-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.5rem;}
+.award-chip{display:flex;align-items:center;gap:.6rem;padding:.65rem 1.1rem;border:1px solid var(--border);border-radius:3px;background:var(--surface);font-size:.8rem;color:var(--text2);transition:border-color .2s;}
+.award-chip:hover{border-color:var(--border2);}
+
+/* certifications */
+#certifications{background:var(--bg);}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:3.5rem;}
+.cert-card{border:1px solid var(--border);background:var(--surface);padding:1.5rem;border-radius:5px;position:relative;overflow:hidden;transition:border-color .25s;display:flex;flex-direction:column;}
+.cert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal),var(--purple));}
+.cert-card:hover{border-color:var(--border2);}
+.cert-issuer{font-size:.7rem;font-family:var(--font-mono);color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem;}
+.cert-title{font-family:var(--font-serif);font-size:1rem;margin-bottom:.75rem;line-height:1.4;flex:1;}
+.cert-meta{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:.75rem;}
+.cert-date,.cert-id{font-size:.7rem;color:var(--text3);font-family:var(--font-mono);}
+.cert-skills{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.85rem;}
+.cert-skill-tag{font-size:.65rem;font-family:var(--font-mono);padding:.2rem .5rem;border:1px solid var(--border);color:var(--text3);border-radius:2px;}
+.cert-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;font-family:var(--font-mono);color:var(--text3);text-decoration:none;transition:color .2s;margin-top:auto;}
+.cert-link:hover{color:var(--gold);}
+
+/* contact */
+#contact{background:var(--bg2);border-top:1px solid var(--border);position:relative;overflow:hidden;}
+#contact::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(232,184,109,.04) 0%,transparent 70%);pointer-events:none;}
+.contact-inner{max-width:700px;}
+.contact-heading{font-family:var(--font-serif);font-size:clamp(2.5rem,5vw,5rem);line-height:1;letter-spacing:-.03em;margin:2rem 0 1.5rem;}
+.contact-heading span{display:block;background:linear-gradient(120deg,var(--gold),#f4d08a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.contact-sub{font-size:1rem;color:var(--ink);line-height:1.8;max-width:520px;font-weight:300;margin-bottom:3rem;}
+.avail{display:inline-block;margin-top:.85rem;font-family:var(--font-mono);font-size:.7rem;color:var(--gold);letter-spacing:.1em;}
+.contact-links{display:flex;flex-direction:column;gap:.75rem;}
+.contact-link{display:flex;align-items:center;gap:1.5rem;padding:1.1rem 1.5rem;border:1px solid var(--border);background:var(--surface);text-decoration:none;color:var(--text);border-radius:5px;transition:all .25s;}
+.contact-link:hover{border-color:var(--gold);background:rgba(232,184,109,.04);transform:translateX(4px);}
+.contact-link-label{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);width:80px;flex-shrink:0;}
+.contact-link-val{font-size:.9rem;color:var(--text2);}
+.contact-link-arrow{margin-left:auto;color:var(--text3);transition:transform .2s;}
+.contact-link:hover .contact-link-arrow{transform:translateX(4px);color:var(--gold);}
+
+footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;}
+.footer-copy{font-size:.72rem;color:var(--text3);font-family:var(--font-mono);}
+.footer-copy span{color:var(--text2);}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.25rem;}
+  .nav-links{display:none;position:fixed;top:60px;left:0;right:0;bottom:0;background:rgba(6,8,15,.97);flex-direction:column;align-items:center;justify-content:center;gap:2rem;z-index:190;}
+  .nav-links.open{display:flex;}
+  .nav-links a{font-size:1rem;}
+  #nav-toggle{display:flex;}
+  #nav-toggle.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px);}
+  #nav-toggle.open span:nth-child(2){opacity:0;}
+  #nav-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);}
+  .nav-status{display:none;}
+  section{padding:4.5rem 1.25rem;}
+  #hero{padding-bottom:4rem;}
+  .hero-content{padding:0 1.25rem;}
+  .about-layout,.edu-grid{grid-template-columns:1fr;}
+  .exp-item{grid-template-columns:1fr;}
+  .exp-left{margin-bottom:.5rem;}
+  .featured-grid{grid-template-columns:1fr;}
+  footer{padding:1.5rem 1.25rem;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Nicole<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-status"><div class="status-dot"></div>Open to roles</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-visual" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="hg1" cx="30%" cy="60%"><stop offset="0%" stop-color="#5b8dee" stop-opacity=".4"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        <radialGradient id="hg2" cx="80%" cy="30%"><stop offset="0%" stop-color="#e8b86d" stop-opacity=".25"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        <radialGradient id="hg3" cx="60%" cy="80%"><stop offset="0%" stop-color="#4ecdc4" stop-opacity=".2"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      </defs>
+      <rect width="1440" height="900" fill="#06080f"/>
+      <ellipse cx="430" cy="540" rx="600" ry="400" fill="url(#hg1)"/>
+      <ellipse cx="1150" cy="270" rx="500" ry="350" fill="url(#hg2)"/>
+      <ellipse cx="860" cy="720" rx="400" ry="300" fill="url(#hg3)"/>
+      <!-- subtle grid -->
+      <g stroke="#1e2a3e" stroke-width=".5" opacity=".6">
+        <line x1="0" y1="150" x2="1440" y2="150"/><line x1="0" y1="300" x2="1440" y2="300"/>
+        <line x1="0" y1="450" x2="1440" y2="450"/><line x1="0" y1="600" x2="1440" y2="600"/>
+        <line x1="0" y1="750" x2="1440" y2="750"/>
+        <line x1="240" y1="0" x2="240" y2="900"/><line x1="480" y1="0" x2="480" y2="900"/>
+        <line x1="720" y1="0" x2="720" y2="900"/><line x1="960" y1="0" x2="960" y2="900"/>
+        <line x1="1200" y1="0" x2="1200" y2="900"/>
+      </g>
+      <!-- floating dots -->
+      <circle cx="180" cy="200" r="2" fill="#e8b86d" opacity=".5"/>
+      <circle cx="1260" cy="450" r="3" fill="#5b8dee" opacity=".4"/>
+      <circle cx="700" cy="100" r="1.5" fill="#4ecdc4" opacity=".5"/>
+      <circle cx="1050" cy="700" r="2.5" fill="#e8b86d" opacity=".3"/>
+      <circle cx="350" cy="750" r="2" fill="#b39ddb" opacity=".4"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Manchester, UK · Data Science & AI</div>
+    <h1 class="hero-name">Nicole<span class="last">Mascarenhas</span></h1>
+    <p class="hero-desc">
+      MSc Data Science student at the University of Manchester, building systems at the intersection of machine learning and real-world impact — from a <strong>fraud detection system for SDK.finance</strong> to a <strong>multimodal healthcare AI dissertation on ICU patient records</strong>.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">See my work</a>
+      <a href="#contact" class="btn-ghost">Get in touch</a>
+    </div>
+    <div class="hero-chips">
+      <span class="hero-chip">4 data/AI internships</span>
+      <span class="hero-chip">Global Futures Scholar</span>
+      <span class="hero-chip">Graduating Sep 2026</span>
+      <span class="hero-chip">Open to opportunities</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-kicker">About</div>
+  <h2 class="section-title">Hi, I'm Nicole</h2>
+  <div class="about-layout">
+    <div class="about-story reveal">
+      <p>I'm finishing an MSc in Data Science at Manchester. Most of what’s on this site grew out of projects I built simply because I wanted to understand the problem deeply — <strong>fraud detection systems, RAG pipelines, adaptive learning platforms, clinical prediction models</strong>.</p>
+      <p>My dissertation is the one I'm most invested in right now: fusing patient demographics, timestamped vitals, clinical events, and clinical notes from the MIMIC-III ICU database — <em>58,000 admissions from Beth Israel Deaconess Medical Center</em> — to jointly predict mortality, length of stay, and clinical phenotypes. ICU data is genuinely hard to work with — noisy, incomplete, and multimodal — and that complexity is precisely what the architecture is designed to handle.</p>
+      <p>Before Manchester I completed a First Class BEng in AI & Data Science in Mumbai. I was also vice-captain of the college drone club, which meant actually building and flying a drone, not just reading about it.</p>
+      <p>I am actively seeking <strong>data science, ML, or AI engineering roles</strong> in the UK and am available to start from September 2026.</p>
+    </div>
+    <div class="about-aside reveal">
+      <div class="fact-stack">
+        <div class="fact-item">
+          <div class="fact-num">2026</div>
+          <div class="fact-label">MSc Graduate</div>
+          <div class="fact-desc">University of Manchester — available for roles from September 2026, open to opportunities now</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">4</div>
+          <div class="fact-label">Internships</div>
+          <div class="fact-desc">Clinical AI, data analytics, ML, and workflow automation — built for real constraints</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">1st</div>
+          <div class="fact-label">Class Honours</div>
+          <div class="fact-desc">BEng AI & Data Science, University of Mumbai </div>
+        </div>
+      </div>
+      <div class="scholarship-strip">
+        <div class="scholarship-icon">🏅</div>
+        <div class="scholarship-text">
+          <strong>Global Futures Scholarship</strong>
+          <p>Merit‑based scholarship awarded by the University of Manchester for academic excellence.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-kicker">Capabilities</div>
+  <h2 class="section-title">Skills</h2>
+  <p class="section-sub">What I rely on when building things.</p>
+  <div class="skills-table reveal">
+    <div class="skill-row">
+      <div class="skill-cat sk-ml"><span class="dot"></span>ML & Deep Learning</div>
+      <div class="skill-tags-wrap">
+        <span class="stag core">PyTorch</span><span class="stag core">TensorFlow / Keras</span><span class="stag core">scikit-learn</span><span class="stag core">XGBoost</span>
+        <span class="stag">LSTM / GRU</span><span class="stag">Transformers</span><span class="stag">Cross-Attention</span><span class="stag">GANs</span><span class="stag">CNN / VAE</span><span class="stag">H2O GLM</span><span class="stag">Isolation Forest</span><span class="stag">SHAP</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat sk-nlp"><span class="dot"></span>NLP & Gen AI</div>
+      <div class="skill-tags-wrap">
+        <span class="stag core">RAG Pipelines</span><span class="stag core">LangChain</span><span class="stag core">FAISS</span><span class="stag core">Prompt Engineering</span>
+        <span class="stag">Gemini API</span><span class="stag">Qwen2.5</span><span class="stag">BGE / Sentence-Transformers</span><span class="stag">BM25</span><span class="stag">Cross-Encoder Reranking</span><span class="stag">spaCy</span><span class="stag">TF-IDF / GloVe</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat sk-eng"><span class="dot"></span>Data Engineering</div>
+      <div class="skill-tags-wrap">
+        <span class="stag core">Python</span><span class="stag core">SQL</span><span class="stag core">Pandas / NumPy</span>
+        <span class="stag">ETL Pipelines</span><span class="stag">Selenium</span><span class="stag">BeautifulSoup</span><span class="stag">Django REST</span><span class="stag">Flask</span><span class="stag">MongoDB</span><span class="stag">PySpark / MLlib</span><span class="stag">Docker</span><span class="stag">Snowflake</span><span class="stag">BigQuery</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat sk-viz"><span class="dot"></span>Analysis & Viz</div>
+      <div class="skill-tags-wrap">
+        <span class="stag core">Power BI</span><span class="stag core">EDA</span><span class="stag core">ARIMA / Time Series</span>
+        <span class="stag">Plotly</span><span class="stag">Matplotlib / Seaborn</span><span class="stag">Tableau</span><span class="stag">D3.js</span><span class="stag">A/B Testing</span><span class="stag">Hypothesis Testing</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <div class="skill-cat sk-tools"><span class="dot"></span>Deployment</div>
+      <div class="skill-tags-wrap">
+        <span class="stag core">Streamlit</span><span class="stag core">Git / GitHub</span><span class="stag core">Power Automate</span>
+        <span class="stag">Gradio</span><span class="stag">Azure ML</span><span class="stag">Jupyter</span><span class="stag">PyInstaller</span><span class="stag">R</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-kicker">Work</div>
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-intro">
+    <p>A selection of independent and academic projects across machine learning, NLP, healthcare AI, and data engineering. Pinned projects highlight my most substantial work.</p>
+  </div>
+  <div class="projects-filter">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="dissertation">Dissertation</button>
+    <button class="filter-btn" data-filter="nlp">NLP</button>
+    <button class="filter-btn" data-filter="gen-ai">Gen AI</button>
+    <button class="filter-btn" data-filter="ml">ML</button>
+    <button class="filter-btn" data-filter="dl">Deep Learning</button>
+    <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+    <button class="filter-btn" data-filter="data-eng">Data Eng</button>
+  </div>
+  <div class="featured-band">
+    <div class="featured-label">Pinned — top projects</div>
+    <div class="featured-grid" id="featuredGrid"></div>
+  </div>
+  <div class="projects-divider">All projects</div>
+  <div class="projects-grid" id="projectsGrid">
+<div class="project-card reveal" data-cats="dissertation ml dl" data-slug="dissertation">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#0b1320"/>
+      <defs><linearGradient id="dg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5b8dee" stop-opacity=".4"/><stop offset="100%" stop-color="#4ecdc4" stop-opacity=".2"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#dg1)"/>
+      <!-- ECG/vitals line -->
+      <polyline points="0,90 40,90 55,45 65,120 80,75 95,75 130,90 155,90 175,30 185,115 200,75 220,75 260,90 400,90" stroke="#5b8dee" stroke-width="1.8" fill="none" opacity=".7"/>
+      <!-- heartbeat pulse -->
+      <circle cx="175" cy="30" r="4" fill="#5b8dee" opacity=".8"/>
+      <!-- DNA helix hint -->
+      <g opacity=".25" stroke="#4ecdc4" stroke-width="1">
+        <path d="M320,20 Q345,40 320,60 Q295,80 320,100 Q345,120 320,140" fill="none"/>
+        <path d="M340,20 Q315,40 340,60 Q365,80 340,100 Q315,120 340,140" fill="none"/>
+        <line x1="320" y1="40" x2="340" y2="40"/><line x1="320" y1="60" x2="340" y2="60"/>
+        <line x1="320" y1="80" x2="340" y2="80"/><line x1="320" y1="100" x2="340" y2="100"/>
+        <line x1="320" y1="120" x2="340" y2="120"/>
+      </g>
+      <!-- text label -->
+      <text x="20" y="135" fill="#5b8dee" font-size="9" font-family="monospace" opacity=".5">MIMIC-III · EHR · Multimodal Fusion</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge dissertation">Dissertation</span>
+    <span class="card-year">2026 — ongoing</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">Multimodal Learning for Disease Risk Prediction</div>
+    <div class="card-story">MIMIC-III is a de-identified ICU database from Beth Israel Deaconess Medical Center in Boston — 58,000 admissions, over a decade of critical care records. My dissertation builds a model that reads all four data types together: patient demographics, timestamped vitals, clinical events, and free-text doctor notes. LSTM and Transformer encoders handle each stream, connected by cross-attention, then jointly predict mortality, length of stay, and clinical phenotypes in one pass.</div>
+    <div class="card-impact">In progress · Beth Israel Deaconess ICU data · Multi-task across 3 clinical outcomes</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">PyTorch</span><span class="tech-tag">MIMIC-III</span><span class="tech-tag">Transformers</span><span class="tech-tag">Cross-Attention</span></div>
+  </div>
+</div>
+
+<!-- 2. FRAUD DETECTION -->
+<div class="project-card reveal" data-cats="ml industry" data-slug="fraud">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#100e0a"/>
+      <defs><linearGradient id="fg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8b86d" stop-opacity=".3"/><stop offset="100%" stop-color="#f07878" stop-opacity=".15"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#fg1)"/>
+      <!-- bar chart of transactions -->
+      <rect x="30" y="80" width="16" height="50" fill="#e8b86d" opacity=".3" rx="1"/>
+      <rect x="54" y="60" width="16" height="70" fill="#e8b86d" opacity=".35" rx="1"/>
+      <rect x="78" y="50" width="16" height="80" fill="#e8b86d" opacity=".4" rx="1"/>
+      <rect x="102" y="70" width="16" height="60" fill="#e8b86d" opacity=".3" rx="1"/>
+      <!-- FRAUD flagged bars in red -->
+      <rect x="126" y="20" width="16" height="110" fill="#f07878" opacity=".7" rx="1"/>
+      <text x="134" y="16" fill="#f07878" font-size="8" text-anchor="middle" font-family="monospace">!</text>
+      <rect x="150" y="65" width="16" height="65" fill="#e8b86d" opacity=".3" rx="1"/>
+      <rect x="174" y="40" width="16" height="90" fill="#e8b86d" opacity=".35" rx="1"/>
+      <!-- PR-AUC arc -->
+      <circle cx="300" cy="75" r="45" fill="none" stroke="#e8b86d" stroke-width="1" opacity=".1"/>
+      <circle cx="300" cy="75" r="45" fill="none" stroke="#e8b86d" stroke-width="3" opacity=".6" stroke-dasharray="254" stroke-dashoffset="25" stroke-linecap="round"/>
+      <text x="300" y="70" fill="#e8b86d" font-size="16" font-weight="bold" text-anchor="middle" font-family="monospace">0.94</text>
+      <text x="300" y="85" fill="#e8b86d" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">PR-AUC</text>
+      <text x="20" y="143" fill="#e8b86d" font-size="8" font-family="monospace" opacity=".4">SDK.finance · Industry-Mentored</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge industry">Industry-Mentored</span>
+    <span class="card-year">Feb – May 2026</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">Fraud Detection for SDK.finance</div>
+    <div class="card-story">Built with SDK.finance as an industry partner. Two-stage pipeline: Isolation Forest flags the suspicious top 10% first, then H2O GLM scores each one with an interpretable probability. Outcome: 77% of fraud caught at a precision that keeps false positives manageable. Deployed as a Streamlit fraud detection dashboard.</div>
+    <div class="card-impact">77% fraud recall · 90% queue reduction · PR-AUC 0.94 on filtered subset</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">Isolation Forest</span><span class="tech-tag">H2O GLM</span><span class="tech-tag">scikit-learn</span><span class="tech-tag">Streamlit</span></div>
+  </div>
+</div>
+
+<!-- 3. AI LEARNING PLATFORM -->
+<div class="project-card reveal" data-cats="gen-ai nlp fullstack" data-slug="learning">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#090d14"/>
+      <defs><linearGradient id="lg1" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#b39ddb" stop-opacity=".3"/><stop offset="100%" stop-color="#4ecdc4" stop-opacity=".2"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#lg1)"/>
+      <!-- Ebbinghaus forgetting curve -->
+      <path d="M30,30 Q80,35 120,55 Q180,80 240,100 Q300,115 400,125" stroke="#b39ddb" stroke-width="1.5" fill="none" opacity=".6"/>
+      <!-- spaced rep review dots on curve -->
+      <circle cx="60" cy="32" r="4" fill="#4ecdc4" opacity=".9"/>
+      <circle cx="130" cy="58" r="4" fill="#4ecdc4" opacity=".8"/>
+      <circle cx="210" cy="88" r="4" fill="#4ecdc4" opacity=".8"/>
+      <circle cx="300" cy="113" r="4" fill="#4ecdc4" opacity=".7"/>
+      <!-- vertical review lines -->
+      <line x1="60" y1="32" x2="60" y2="130" stroke="#4ecdc4" stroke-width=".8" opacity=".3" stroke-dasharray="3,3"/>
+      <line x1="130" y1="58" x2="130" y2="130" stroke="#4ecdc4" stroke-width=".8" opacity=".3" stroke-dasharray="3,3"/>
+      <line x1="210" y1="88" x2="210" y2="130" stroke="#4ecdc4" stroke-width=".8" opacity=".3" stroke-dasharray="3,3"/>
+      <!-- label -->
+      <text x="320" y="45" fill="#b39ddb" font-size="9" font-family="monospace" opacity=".6">Ebbinghaus</text>
+      <text x="320" y="57" fill="#4ecdc4" font-size="9" font-family="monospace" opacity=".6">ACT-R</text>
+      <text x="320" y="69" fill="#5b8dee" font-size="9" font-family="monospace" opacity=".6">ML model</text>
+      <text x="20" y="143" fill="#b39ddb" font-size="8" font-family="monospace" opacity=".4">A/B tested · Flask · MongoDB · D3.js</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge fullstack">Full Stack</span>
+    <span class="card-year">Jul 2024 – May 2025</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">AI Enhanced Learning Platform</div>
+    <div class="card-story">Converts YouTube videos into adaptive study tools — quizzes, flashcards, summaries, and concept graphs. Three memory models (Ebbinghaus, ACT-R, and an ML-based one) were A/B tested head-to-head for retention. Quiz difficulty adjusts in real-time based on how you're actually performing.</div>
+    <div class="card-impact">3 memory models A/B tested with statistical significance · Adaptive difficulty from live performance data</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">Flask</span><span class="tech-tag">MongoDB</span><span class="tech-tag">Gemini API</span><span class="tech-tag">spaCy</span><span class="tech-tag">D3.js</span></div>
+    <div class="card-links">
+      <a class="card-link" href="https://github.com/nicolemas27/AI-Enhanced-Learning-Platform" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
+    </div>
+  </div>
+</div>
+
+<!-- 4. RAG CUISINE -->
+<div class="project-card reveal" data-cats="ml">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#080c0a"/>
+      <defs><linearGradient id="shpg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#34d399" stop-opacity=".18"/><stop offset="100%" stop-color="#a78bfa" stop-opacity=".1"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#shpg)"/>
+      <rect x="40" y="110" width="60" height="8" rx="1" fill="#f87171" opacity=".5"/>
+      <rect x="40" y="95" width="100" height="8" rx="1" fill="#34d399" opacity=".6"/>
+      <rect x="40" y="80" width="45" height="8" rx="1" fill="#f87171" opacity=".4"/>
+      <rect x="40" y="65" width="130" height="8" rx="1" fill="#34d399" opacity=".7"/>
+      <rect x="40" y="50" width="80" height="8" rx="1" fill="#a78bfa" opacity=".5"/>
+      <text x="40" y="30" fill="#34d399" font-size="8" font-family="monospace" opacity=".6">SHAP waterfall · per-patient explanations</text>
+      <text x="40" y="42" fill="#a78bfa" font-size="7" font-family="monospace" opacity=".4">Random Forest · explainable AI</text>
+      <line x1="38" y1="48" x2="38" y2="122" stroke="#34d399" stroke-width="1" opacity=".3"/>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge ml">Explainable AI</span>
+    <span class="card-year">Jun – Aug 2023</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">Disease Outcome Predictor (SHAP)</div>
+    <div class="card-story">Built during my internship at Tannmann Foundation — predicts patient disease outcomes from symptom profiles (fever, breathing difficulty, blood pressure, cholesterol). Every prediction is explained using SHAP TreeExplainer with per-patient waterfall charts. Deployed as a multi-tab Streamlit app with global feature importance and a data explorer.</div>
+    <div class="card-impact">Per-patient SHAP waterfall charts · Global feature importance · Not a black box</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">Python</span><span class="tech-tag">Random Forest</span><span class="tech-tag">SHAP</span><span class="tech-tag">scikit-learn</span><span class="tech-tag">Streamlit</span></div>
+    <div class="card-links">
+      <a class="card-link" href="https://github.com/nicolemas27/Consultant-Platform" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
+    </div>
+  </div>
+</div>
+<div class="project-card reveal" data-cats="gen-ai nlp" data-slug="rag">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#0a100e"/>
+      <defs><linearGradient id="rg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4ecdc4" stop-opacity=".25"/><stop offset="100%" stop-color="#5b8dee" stop-opacity=".15"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#rg1)"/>
+      <!-- RAG pipeline diagram -->
+      <rect x="20" y="55" width="70" height="30" rx="3" fill="#4ecdc4" fill-opacity=".1" stroke="#4ecdc4" stroke-width="1" stroke-opacity=".4"/>
+      <text x="55" y="66" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".8">450+ docs</text>
+      <text x="55" y="78" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".6">Wikipedia</text>
+      <line x1="90" y1="70" x2="110" y2="70" stroke="#4ecdc4" stroke-width="1" opacity=".5" marker-end="url(#arr)"/>
+      <rect x="110" y="50" width="80" height="40" rx="3" fill="#5b8dee" fill-opacity=".1" stroke="#5b8dee" stroke-width="1" stroke-opacity=".4"/>
+      <text x="150" y="66" fill="#5b8dee" font-size="7" text-anchor="middle" font-family="monospace" opacity=".8">BGE FAISS</text>
+      <text x="150" y="78" fill="#5b8dee" font-size="7" text-anchor="middle" font-family="monospace" opacity=".6">+ BM25 0.6/0.4</text>
+      <line x1="190" y1="70" x2="210" y2="70" stroke="#5b8dee" stroke-width="1" opacity=".5"/>
+      <rect x="210" y="50" width="75" height="40" rx="3" fill="#b39ddb" fill-opacity=".1" stroke="#b39ddb" stroke-width="1" stroke-opacity=".4"/>
+      <text x="247" y="66" fill="#b39ddb" font-size="7" text-anchor="middle" font-family="monospace" opacity=".8">Cross-Encoder</text>
+      <text x="247" y="78" fill="#b39ddb" font-size="7" text-anchor="middle" font-family="monospace" opacity=".6">Reranker</text>
+      <line x1="285" y1="70" x2="305" y2="70" stroke="#b39ddb" stroke-width="1" opacity=".5"/>
+      <rect x="305" y="50" width="75" height="40" rx="3" fill="#e8b86d" fill-opacity=".1" stroke="#e8b86d" stroke-width="1" stroke-opacity=".4"/>
+      <text x="342" y="66" fill="#e8b86d" font-size="7" text-anchor="middle" font-family="monospace" opacity=".8">Qwen2.5</text>
+      <text x="342" y="78" fill="#e8b86d" font-size="7" text-anchor="middle" font-family="monospace" opacity=".6">CoT Prompt</text>
+      <text x="20" y="143" fill="#4ecdc4" font-size="8" font-family="monospace" opacity=".4">RAG · Hybrid Retrieval · South Asian Cuisine QA</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge gen-ai">Gen AI</span>
+    <span class="card-year">Feb – May 2026</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">RAG Cuisine Agent</div>
+    <div class="card-story">A full retrieval-augmented generation pipeline for South Asian cuisine QA. Scraped 450+ docs from Wikipedia, Wikibooks, and food blogs with adaptive chunking per source type. Hybrid retrieval: BGE-large dense vectors (FAISS) weighted 60% + BM25 sparse 40%, then re-ranked by a cross-encoder before hitting Qwen2.5 with chain-of-thought prompting.</div>
+    <div class="card-impact">Hybrid dense+sparse retrieval · Cross-encoder re-ranking · CoT vs zero-shot vs few-shot compared</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">FAISS</span><span class="tech-tag">BGE</span><span class="tech-tag">BM25</span><span class="tech-tag">Cross-Encoder</span><span class="tech-tag">Qwen2.5</span></div>
+  </div>
+</div>
+
+<!-- 5. LSTM NEXT WORD -->
+<div class="project-card reveal" data-cats="ml data-eng">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#0c0a0a"/>
+      <defs><linearGradient id="eyg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f07878" stop-opacity=".15"/><stop offset="100%" stop-color="#e8b86d" stop-opacity=".15"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#eyg)"/>
+      <text x="50" y="100" fill="#f07878" font-size="64" font-family="serif" font-weight="bold" opacity=".08">EY</text>
+      <rect x="200" y="35" width="180" height="18" rx="3" fill="#f07878" fill-opacity=".08" stroke="#f07878" stroke-width=".5" stroke-opacity=".3"/>
+      <text x="290" y="47" fill="#f07878" font-size="8" text-anchor="middle" font-family="monospace" opacity=".6">Data Challenge 2026</text>
+      <rect x="200" y="60" width="180" height="14" rx="2" fill="#e8b86d" fill-opacity=".06" stroke="#e8b86d" stroke-width=".5" stroke-opacity=".3"/>
+      <text x="290" y="70" fill="#e8b86d" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">Snowflake · scikit-learn</text>
+      <rect x="200" y="82" width="180" height="14" rx="2" fill="#58d68d" fill-opacity=".06" stroke="#58d68d" stroke-width=".5" stroke-opacity=".3"/>
+      <text x="290" y="92" fill="#58d68d" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">End-to-end ML pipeline</text>
+      <text x="15" y="143" fill="#f07878" font-size="8" font-family="monospace" opacity=".4">Open Science Data Challenge · Team competition</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge hackathon">Hackathon</span>
+    <span class="card-year">2026</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">EY Open Science Data Challenge 2026</div>
+    <div class="card-story">Given ~200 river locations across South Africa, we had to predict water quality — Total Alkalinity, Electrical Conductance, Dissolved Reactive Phosphorus — for completely unseen locations. Features came from Landsat spectral bands, TerraClimate climate variables, land cover fractions, and terrain data. We trained CatBoost, LightGBM, and XGBoost with Optuna tuning and built an ensemble.</div>
+    <div class="card-impact">Spatial leakage diagnosed via SHAP · GroupShuffleSplit → region-clustered CV · CatBoost + LightGBM + XGBoost ensemble</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">CatBoost</span><span class="tech-tag">LightGBM</span><span class="tech-tag">XGBoost</span><span class="tech-tag">Optuna</span><span class="tech-tag">SHAP</span><span class="tech-tag">Landsat</span></div>
+  </div>
+</div>
+
+  
+<div class="project-card reveal" data-cats="nlp dl" data-slug="lstm">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#090c14"/>
+      <defs><linearGradient id="ng1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5b8dee" stop-opacity=".2"/><stop offset="100%" stop-color="#b39ddb" stop-opacity=".2"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#ng1)"/>
+      <!-- LSTM cell diagram -->
+      <rect x="40" y="40" width="80" height="65" rx="4" fill="none" stroke="#5b8dee" stroke-width="1" opacity=".5"/>
+      <text x="80" y="62" fill="#5b8dee" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">Bi-LSTM</text>
+      <text x="80" y="74" fill="#5b8dee" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">2M+ seqs</text>
+      <text x="80" y="86" fill="#5b8dee" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">GloVe 300d</text>
+      <!-- arrow to attention -->
+      <path d="M120,72 L150,72" stroke="#5b8dee" stroke-width="1.2" opacity=".5" marker-end="url(#arr2)"/>
+      <rect x="150" y="45" width="70" height="55" rx="4" fill="none" stroke="#b39ddb" stroke-width="1" opacity=".5"/>
+      <text x="185" y="68" fill="#b39ddb" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">Attention</text>
+      <text x="185" y="80" fill="#b39ddb" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">custom</text>
+      <!-- arrow to softmax -->
+      <path d="M220,72 L250,72" stroke="#b39ddb" stroke-width="1.2" opacity=".5"/>
+      <rect x="250" y="50" width="65" height="45" rx="4" fill="none" stroke="#4ecdc4" stroke-width="1" opacity=".5"/>
+      <text x="282" y="72" fill="#4ecdc4" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">Softmax</text>
+      <text x="282" y="84" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">next word</text>
+      <!-- temperature sampling note -->
+      <text x="345" y="60" fill="#e8b86d" font-size="7" font-family="monospace" opacity=".5">temp</text>
+      <text x="345" y="72" fill="#e8b86d" font-size="7" font-family="monospace" opacity=".5">sampling</text>
+      <text x="20" y="143" fill="#5b8dee" font-size="8" font-family="monospace" opacity=".4">Streamlit live demo · Classic literature corpus</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge nlp">NLP</span>
+    <span class="card-year">Jan – May 2024</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">Next Word Predictor with LSTM & Attention</div>
+    <div class="card-story">Language model trained on 2M+ sequences from classic literature — iterated from vanilla LSTM, to bidirectional LSTM, to a custom attention mechanism, to GloVe 300-dim transfer learning. Temperature sampling lets you dial the creativity up or down. There's a live Streamlit demo you can actually try.</div>
+    <div class="card-impact">GloVe transfer learning · Custom attention mechanism · Live Streamlit demo</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">TensorFlow</span><span class="tech-tag">Bi-LSTM</span><span class="tech-tag">GloVe</span><span class="tech-tag">Attention</span><span class="tech-tag">Streamlit</span></div>
+    <div class="card-links">
+      <a class="card-link" href="https://github.com/nicolemas27/Next-Word-Prediction" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
+      <a class="card-link live" href="https://next-word-prediction-text.streamlit.app/" target="_blank">↗ Live</a>
+    </div>
+  </div>
+</div>
+
+<!-- 6. TRANSFORMER TRANSLATION -->
+<div class="project-card reveal" data-cats="ml data-eng">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#090c0a"/>
+      <defs><linearGradient id="prg" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#58d68d" stop-opacity=".2"/><stop offset="100%" stop-color="#e8b86d" stop-opacity=".15"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#prg)"/>
+      <!-- efficient frontier curve -->
+      <path d="M50,130 Q80,110 110,85 Q150,55 200,40 Q250,28 310,25 Q350,24 390,26" stroke="#58d68d" stroke-width="2" fill="none" opacity=".6"/>
+      <!-- scatter dots (portfolios) -->
+      <circle cx="120" cy="90" r="3" fill="#5b8dee" opacity=".5"/>
+      <circle cx="160" cy="65" r="3" fill="#5b8dee" opacity=".5"/>
+      <circle cx="200" cy="50" r="4" fill="#e8b86d" opacity=".8"/>
+      <text x="206" y="46" fill="#e8b86d" font-size="7" font-family="monospace" opacity=".8">optimal</text>
+      <circle cx="240" cy="40" r="3" fill="#5b8dee" opacity=".5"/>
+      <circle cx="280" cy="32" r="3" fill="#5b8dee" opacity=".5"/>
+      <!-- axis labels -->
+      <text x="55" y="145" fill="#58d68d" font-size="8" font-family="monospace" opacity=".5">risk →</text>
+      <text x="15" y="80" fill="#58d68d" font-size="8" font-family="monospace" opacity=".5" transform="rotate(-90,15,80)">return →</text>
+      <text x="220" y="143" fill="#e8b86d" font-size="7" font-family="monospace" opacity=".4">–8.85% → –3.10% with bond allocation</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge ml">Quant Finance</span>
+    <span class="card-year">2025</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">Portfolio Risk & Optimisation Engine</div>
+    <div class="card-story">I built this to understand Modern Portfolio Theory by actually implementing it — not just reading about it. It downloads live market data, computes VaR, CVaR, Sharpe ratio, and max drawdown, runs Monte Carlo simulations for the Efficient Frontier, and stress-tests against crash scenarios. The most interesting finding: a 40% bond allocation cut simulated Tech Meltdown losses from –8.85% to –3.10%.</div>
+    <div class="card-impact">–8.85% → –3.10% loss reduction with bonds · Monte Carlo Efficient Frontier · Live Streamlit dashboard</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">Python</span><span class="tech-tag">NumPy</span><span class="tech-tag">Pandas</span><span class="tech-tag">Streamlit</span></div>
+    <div class="card-links">
+      <a class="card-link" href="https://github.com/nicolemas27/Portfolio-risk-optimization" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
+      <a class="card-link live" href="https://portfolio-risk-optimization.streamlit.app/" target="_blank">↗ Live</a>
+    </div>
+  </div>
+</div>
+
+<!-- 12. DRONE SURVEILLANCE -->
+<div class="project-card reveal" data-cats="dl ml">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#0a0c0a"/>
+      <defs><linearGradient id="wg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#58d68d" stop-opacity=".1"/><stop offset="100%" stop-color="#58d68d" stop-opacity=".0"/></linearGradient></defs>
+      <!-- candlestick chart -->
+      <g opacity=".6">
+        <line x1="40" y1="45" x2="40" y2="100" stroke="#f07878" stroke-width="1"/><rect x="35" y="55" width="10" height="30" fill="#f07878"/>
+        <line x1="70" y1="40" x2="70" y2="95" stroke="#58d68d" stroke-width="1"/><rect x="65" y="50" width="10" height="25" fill="#58d68d"/>
+        <line x1="100" y1="50" x2="100" y2="105" stroke="#f07878" stroke-width="1"/><rect x="95" y="62" width="10" height="28" fill="#f07878"/>
+        <line x1="130" y1="35" x2="130" y2="90" stroke="#58d68d" stroke-width="1"/><rect x="125" y="45" width="10" height="30" fill="#58d68d"/>
+        <line x1="160" y1="48" x2="160" y2="98" stroke="#58d68d" stroke-width="1"/><rect x="155" y="55" width="10" height="26" fill="#58d68d"/>
+      </g>
+      <!-- GAN synthetic overlay -->
+      <path d="M200,75 Q220,50 240,70 Q260,90 280,55 Q300,35 320,65 Q340,80 360,60 Q380,45 400,70" stroke="#e8b86d" stroke-width="1.5" fill="url(#wg1)" opacity=".7"/>
+      <text x="205" y="35" fill="#e8b86d" font-size="8" font-family="monospace" opacity=".6">synthetic (GAN)</text>
+      <text x="20" y="143" fill="#58d68d" font-size="8" font-family="monospace" opacity=".4">WaveNet GAN · Dilated Convolutions · Google Stock</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge dl">Deep Learning</span>
+    <span class="card-year">2024</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">WaveNet GAN — Synthetic Stock Price Generation</div>
+    <div class="card-story">I built a GAN that generates realistic synthetic Google stock price sequences — the kind of data you'd use to test trading strategies without touching real markets. The generator uses stacked dilated convolutions to pick up patterns at multiple timescales; the discriminator learns to spot fakes. Checked the output against real historical volatility using MAE and visual inspection.</div>
+    <div class="card-impact">Dilated convolutions for multi-scale temporal patterns · GAN stability via gradient clipping · Synthetic data that passes volatility checks</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">TensorFlow</span><span class="tech-tag">GANs</span><span class="tech-tag">WaveNet</span><span class="tech-tag">Dilated Convolutions</span></div>
+  </div>
+</div>
+
+<!-- 8. TOXIC COMMENT -->
+<div class="project-card reveal" data-cats="data-eng">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#060d12"/>
+      <defs><linearGradient id="wqg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d4ff" stop-opacity=".2"/><stop offset="100%" stop-color="#00e5c3" stop-opacity=".12"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#wqg)"/>
+      <path d="M0,100 Q50,80 100,95 Q150,110 200,88 Q250,66 300,82 Q350,98 400,75 L400,150 L0,150 Z" fill="#00d4ff" opacity=".08"/>
+      <circle cx="80" cy="70" r="4" fill="#00d4ff" opacity=".6"/>
+      <circle cx="160" cy="85" r="3" fill="#34d399" opacity=".5"/>
+      <circle cx="240" cy="60" r="5" fill="#f87171" opacity=".6"/>
+      <circle cx="320" cy="75" r="3" fill="#00d4ff" opacity=".5"/>
+      <text x="40" y="30" fill="#00d4ff" font-size="8" font-family="monospace" opacity=".5">639 locations · 31 states · SDG 6</text>
+      <text x="40" y="42" fill="#00e5c3" font-size="7" font-family="monospace" opacity=".4">WHO / CPCB threshold benchmarking</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge data-eng">Data Engineering</span>
+    <span class="card-year">Jun – Aug 2024</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">India Water Quality Dashboard (SDG 6)</div>
+    <div class="card-story">Built during my CSRBOX internship — an interactive Streamlit dashboard analysing water quality data across 639 monitoring locations in 31 Indian states. Automated A–F grading against WHO and CPCB thresholds, Plotly visualisations, and EDA on BOD, dissolved oxygen, pH, and fecal coliform to identify pollution patterns.</div>
+    <div class="card-impact">639 locations · 31 states · Automated quality grading · SDG 6 aligned</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">Python</span><span class="tech-tag">Streamlit</span><span class="tech-tag">Plotly</span><span class="tech-tag">Pandas</span></div>
+    <div class="card-links">
+      <a class="card-link" href="https://github.com/nicolemas27/India-water-quality-analysis" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
+      <a class="card-link live" href="https://india-water-quality-analysis-123456.streamlit.app/" target="_blank">↗ Live</a>
+    </div>
+  </div>
+</div>
+<div class="project-card reveal" data-cats="ml data-eng">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#090c12"/>
+      <defs><linearGradient id="smg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a78bfa" stop-opacity=".2"/><stop offset="100%" stop-color="#00d4ff" stop-opacity=".15"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#smg)"/>
+      <rect x="40" y="100" width="30" height="40" rx="2" fill="#a78bfa" opacity=".5"/>
+      <rect x="90" y="75" width="30" height="65" rx="2" fill="#a78bfa" opacity=".6"/>
+      <rect x="140" y="55" width="30" height="85" rx="2" fill="#00d4ff" opacity=".7"/>
+      <rect x="190" y="80" width="30" height="60" rx="2" fill="#a78bfa" opacity=".5"/>
+      <rect x="240" y="40" width="30" height="100" rx="2" fill="#00d4ff" opacity=".8"/>
+      <rect x="290" y="65" width="30" height="75" rx="2" fill="#a78bfa" opacity=".5"/>
+      <text x="40" y="30" fill="#a78bfa" font-size="8" font-family="monospace" opacity=".5">engagement prediction · PySpark MLlib</text>
+      <text x="40" y="42" fill="#00d4ff" font-size="7" font-family="monospace" opacity=".4">6.3M records · distributed compute</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge ml">ML · Big Data</span>
+    <span class="card-year">2025</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">PySpark Social Media Engagement Predictor</div>
+    <div class="card-story">Predicting social media engagement at scale using PySpark MLlib on 6.3M records distributed across HDFS. Compared Logistic Regression, Random Forest, and Gradient Boosting in a distributed compute environment. Deployed as a Streamlit dashboard with interactive predictions.</div>
+    <div class="card-impact">6.3M records · Distributed ML on HDFS · Live Streamlit dashboard</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">PySpark</span><span class="tech-tag">MLlib</span><span class="tech-tag">HDFS</span><span class="tech-tag">Streamlit</span></div>
+    <div class="card-links">
+      <a class="card-link" href="https://github.com/nicolemas27/Social-Media-Engagement-Analysis" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
+      <a class="card-link live" href="https://social-media-engagement-analysis.streamlit.app/" target="_blank">↗ Live</a>
+    </div>
+  </div>
+</div>
+<div class="project-card reveal" data-cats="nlp dl">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#0c0a10"/>
+      <defs><linearGradient id="tcg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#b39ddb" stop-opacity=".2"/><stop offset="100%" stop-color="#f07878" stop-opacity=".1"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#tcg)"/>
+      <!-- text blocks representing NLP -->
+      <rect x="20" y="30" width="180" height="12" rx="2" fill="#b39ddb" opacity=".15"/>
+      <rect x="20" y="48" width="140" height="12" rx="2" fill="#b39ddb" opacity=".12"/>
+      <rect x="20" y="66" width="160" height="12" rx="2" fill="#f07878" opacity=".3"/>
+      <text x="26" y="76" fill="#f07878" font-size="7" font-family="monospace" opacity=".6">toxic ← flagged</text>
+      <rect x="20" y="84" width="130" height="12" rx="2" fill="#b39ddb" opacity=".12"/>
+      <rect x="20" y="102" width="150" height="12" rx="2" fill="#b39ddb" opacity=".1"/>
+      <!-- ROC curve -->
+      <path d="M250,120 L250,30 L370,120 Z" fill="none" stroke="#e8b86d" stroke-width=".5" opacity=".2"/>
+      <path d="M250,120 Q270,90 290,75 Q315,58 340,42 L370,30" stroke="#b39ddb" stroke-width="2" fill="none" opacity=".7"/>
+      <text x="310" y="100" fill="#b39ddb" font-size="8" font-family="monospace" opacity=".5">ROC-AUC</text>
+      <text x="20" y="143" fill="#b39ddb" font-size="8" font-family="monospace" opacity=".4">BiGRU · Class imbalance · F1 / Precision / Recall</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge nlp">NLP</span>
+    <span class="card-year">2023</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">Toxic Comment Classification (BiGRU)</div>
+    <div class="card-story">Raw messy text in, multi-label toxicity predictions out. Cleaning, tokenising, padding, embedding, BiGRU — the pipeline was straightforward; the hard part was the severe class imbalance, which weighted loss in training mostly fixed. Reported precision, recall, F1, and ROC-AUC rather than just accuracy, since accuracy on an imbalanced dataset tells you almost nothing.</div>
+    <div class="card-impact">BiGRU with dropout regularisation · Weighted loss for class imbalance · Proper multi-metric evaluation</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">TensorFlow</span><span class="tech-tag">BiGRU</span><span class="tech-tag">NLTK</span><span class="tech-tag">scikit-learn</span></div>
+  </div>
+</div>
+
+<!-- 9. E-COMMERCE PIPELINE -->
+<div class="project-card reveal" data-cats="nlp dl">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#0a0c10"/>
+      <defs><linearGradient id="tg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4ecdc4" stop-opacity=".2"/><stop offset="100%" stop-color="#5b8dee" stop-opacity=".1"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#tg1)"/>
+      <text x="40" y="60" fill="#e8edf8" font-size="22" font-family="serif" opacity=".5">EN</text>
+      <text x="40" y="90" fill="#4ecdc4" font-size="12" font-family="monospace" opacity=".4">Hello</text>
+      <path d="M110,65 L170,65" stroke="#4ecdc4" stroke-width="1.5" opacity=".5"/>
+      <text x="135" y="58" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".6">Attention</text>
+      <rect x="170" y="45" width="60" height="45" rx="4" fill="none" stroke="#5b8dee" stroke-width="1" opacity=".5"/>
+      <text x="200" y="65" fill="#5b8dee" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">Trans-</text>
+      <text x="200" y="77" fill="#5b8dee" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">former</text>
+      <path d="M230,65 L280,65" stroke="#5b8dee" stroke-width="1.5" opacity=".5"/>
+      <text x="300" y="60" fill="#e8edf8" font-size="22" font-family="serif" opacity=".5">HI</text>
+      <text x="295" y="90" fill="#5b8dee" font-size="12" font-family="monospace" opacity=".4">नमस्ते</text>
+      <text x="20" y="130" fill="#4ecdc4" font-size="8" font-family="monospace" opacity=".4">Built from scratch · No HuggingFace · Outperforms LSTM</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge nlp">NLP</span>
+    <span class="card-year">2024</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">Transformer for English–Hindi Translation</div>
+    <div class="card-story">I implemented the full Transformer architecture from scratch — encoder-decoder, multi-head self-attention, positional encoding, feed-forward layers — without touching HuggingFace. Partly to actually understand what's happening inside, partly to benchmark it properly against an LSTM seq2seq baseline. The Transformer wins clearly on long sentences, which is the whole point of the architecture.</div>
+    <div class="card-impact">Built from scratch — no HuggingFace · Outperforms LSTM baseline on long-range dependencies</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">TensorFlow</span><span class="tech-tag">Multi-head Attention</span><span class="tech-tag">seq2seq</span></div>
+  </div>
+</div>
+
+<!-- 7. WAVENET GAN -->
+<div class="project-card reveal" data-cats="data-eng fullstack">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#0a0e0a"/>
+      <defs><linearGradient id="epg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8b86d" stop-opacity=".2"/><stop offset="100%" stop-color="#58d68d" stop-opacity=".1"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#epg)"/>
+      <!-- pipeline flow -->
+      <rect x="15" y="50" width="65" height="38" rx="3" fill="none" stroke="#e8b86d" stroke-width="1" opacity=".5"/>
+      <text x="47" y="65" fill="#e8b86d" font-size="7" text-anchor="middle" font-family="monospace" opacity=".7">Selenium</text>
+      <text x="47" y="78" fill="#e8b86d" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">JS pages</text>
+      <line x1="80" y1="69" x2="100" y2="69" stroke="#e8b86d" stroke-width="1" opacity=".5"/>
+      <rect x="100" y="50" width="65" height="38" rx="3" fill="none" stroke="#4ecdc4" stroke-width="1" opacity=".5"/>
+      <text x="132" y="65" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".7">BS4 parse</text>
+      <text x="132" y="78" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">+ clean</text>
+      <line x1="165" y1="69" x2="185" y2="69" stroke="#4ecdc4" stroke-width="1" opacity=".5"/>
+      <rect x="185" y="50" width="70" height="38" rx="3" fill="none" stroke="#5b8dee" stroke-width="1" opacity=".5"/>
+      <text x="220" y="65" fill="#5b8dee" font-size="7" text-anchor="middle" font-family="monospace" opacity=".7">Transform</text>
+      <text x="220" y="78" fill="#5b8dee" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">per site</text>
+      <line x1="255" y1="69" x2="275" y2="69" stroke="#5b8dee" stroke-width="1" opacity=".5"/>
+      <rect x="275" y="50" width="80" height="38" rx="3" fill="none" stroke="#58d68d" stroke-width="1" opacity=".5"/>
+      <text x="315" y="65" fill="#58d68d" font-size="7" text-anchor="middle" font-family="monospace" opacity=".7">Django REST</text>
+      <text x="315" y="78" fill="#58d68d" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">API endpoints</text>
+      <text x="15" y="130" fill="#e8b86d" font-size="7" font-family="monospace" opacity=".4">Amazon · Flipkart · Myntra — extensible design</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge data-eng">Data Engineering</span>
+    <span class="card-year">2023 – 2024</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">E-Commerce Data Pipeline: Scraper + REST API</div>
+    <div class="card-story">I wanted to scrape product data from Amazon, Flipkart, and Myntra in one place — so I built a modular pipeline to do it. Selenium handles JS-rendered pages, BeautifulSoup does the parsing, and each site has its own transformer class for cleaning. Exposed through a Django REST API — modular enough that adding a new site only means writing one new class.</div>
+    <div class="card-impact">Extensible by design · User-agent rotation + polite delays · One new site = one new class</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">Selenium</span><span class="tech-tag">BeautifulSoup</span><span class="tech-tag">Django REST</span><span class="tech-tag">SQLite</span></div>
+  </div>
+</div>
+
+<!-- 10. CYPHER -->
+<div class="project-card reveal" data-cats="gen-ai fullstack">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#090b0f"/>
+      <defs><linearGradient id="cyg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#b39ddb" stop-opacity=".25"/><stop offset="100%" stop-color="#5b8dee" stop-opacity=".1"/></linearGradient></defs>
+      <rect width="400" height="150" fill="url(#cyg)"/>
+      <!-- soundwave / voice waveform -->
+      <g opacity=".5" stroke="#b39ddb" stroke-width="1.5" stroke-linecap="round">
+        <line x1="30" y1="75" x2="30" y2="75"/><line x1="45" y1="65" x2="45" y2="85"/><line x1="60" y1="50" x2="60" y2="100"/>
+        <line x1="75" y1="40" x2="75" y2="110"/><line x1="90" y1="55" x2="90" y2="95"/>
+        <line x1="105" y1="45" x2="105" y2="105"/><line x1="120" y1="60" x2="120" y2="90"/>
+        <line x1="135" y1="70" x2="135" y2="80"/><line x1="150" y1="62" x2="150" y2="88"/>
+        <line x1="165" y1="48" x2="165" y2="102"/><line x1="180" y1="55" x2="180" y2="95"/>
+        <line x1="195" y1="68" x2="195" y2="82"/>
+      </g>
+      <!-- command text -->
+      <rect x="220" y="45" width="160" height="20" rx="3" fill="#0f1420" opacity=".8"/>
+      <text x="230" y="58" fill="#b39ddb" font-size="8" font-family="monospace" opacity=".8">▶ "open browser"</text>
+      <rect x="220" y="72" width="150" height="20" rx="3" fill="#0f1420" opacity=".8"/>
+      <text x="230" y="85" fill="#58d68d" font-size="8" font-family="monospace" opacity=".8">✓ done</text>
+      <rect x="220" y="98" width="155" height="20" rx="3" fill="#0f1420" opacity=".8"/>
+      <text x="230" y="111" fill="#b39ddb" font-size="8" font-family="monospace" opacity=".8">▶ "take screenshot"</text>
+      <text x="15" y="143" fill="#b39ddb" font-size="8" font-family="monospace" opacity=".4">Packaged .exe · Gemini NLU · Async tasks</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge gen-ai">Gen AI</span>
+    <span class="card-year">Jul 2023 – Apr 2024</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">Cypher — Desktop Voice Assistant</div>
+    <div class="card-story">Desktop voice assistant packaged as a standalone .exe — no Python install needed, just download and run. Voice commands trigger document creation, web search, screenshots, and system tasks. Gemini API handles understanding; async task handling manages concurrent speech and system operations.</div>
+    <div class="card-impact">Zero-install .exe via PyInstaller · Async concurrent speech + tasks</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">Gemini API</span><span class="tech-tag">speech_recognition</span><span class="tech-tag">Tkinter</span><span class="tech-tag">PyInstaller</span></div>
+    <div class="card-links">
+      <a class="card-link" href="https://github.com/nicolemas27/Cypher-Desktop-Voice-Assistant" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
+    </div>
+  </div>
+</div>
+
+<!-- 11. PORTFOLIO RISK -->
+<div class="project-card reveal" data-cats="dl ml">
+  <div class="card-banner">
+    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <rect width="400" height="150" fill="#080c10"/>
+      <defs><radialGradient id="drg" cx="50%" cy="50%"><stop offset="0%" stop-color="#4ecdc4" stop-opacity=".2"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+      <rect width="400" height="150" fill="url(#drg)"/>
+      <!-- drone top view -->
+      <g transform="translate(80,75)" opacity=".6">
+        <line x1="-35" y1="-35" x2="35" y2="35" stroke="#4ecdc4" stroke-width="2"/>
+        <line x1="35" y1="-35" x2="-35" y2="35" stroke="#4ecdc4" stroke-width="2"/>
+        <circle cx="-35" cy="-35" r="10" fill="none" stroke="#4ecdc4" stroke-width="1.5"/>
+        <circle cx="35" cy="-35" r="10" fill="none" stroke="#4ecdc4" stroke-width="1.5"/>
+        <circle cx="-35" cy="35" r="10" fill="none" stroke="#4ecdc4" stroke-width="1.5"/>
+        <circle cx="35" cy="35" r="10" fill="none" stroke="#4ecdc4" stroke-width="1.5"/>
+        <rect x="-8" y="-8" width="16" height="16" rx="2" fill="#4ecdc4" opacity=".4"/>
+      </g>
+      <!-- detection box -->
+      <rect x="240" y="30" width="80" height="60" fill="none" stroke="#f07878" stroke-width="1.5" opacity=".7" stroke-dasharray="4,3"/>
+      <text x="244" y="44" fill="#f07878" font-size="7" font-family="monospace" opacity=".7">person</text>
+      <text x="244" y="56" fill="#f07878" font-size="7" font-family="monospace" opacity=".5">conf: 0.91</text>
+      <text x="244" y="82" fill="#58d68d" font-size="7" font-family="monospace" opacity=".6">→ Firebase</text>
+      <text x="15" y="143" fill="#4ecdc4" font-size="8" font-family="monospace" opacity=".4">SSD MobileNet · Raspberry Pi · MAVLink · Firebase</text>
+    </svg>
+    <div class="card-banner-overlay"></div>
+    <span class="card-type-badge dl">Edge AI</span>
+    <span class="card-year">2023 – 2024</span>
+  </div>
+  <div class="card-body">
+    <div class="card-title">Autonomous Drone Surveillance System</div>
+    <div class="card-story">I was vice-captain of my college drone club and we competed in the SAEINDIA Aerothon. I built the object detection and tracking system: the drone's camera feed goes into SSD MobileNet for inference, then a centroid tracker assigns stable IDs to detected objects across frames. It compares each centroid to the frame centre and sends roll/pitch correction signals to the Pixhawk flight controller over MAVLink — so the drone locks onto and follows a target autonomously.</div>
+    <div class="card-impact">Centroid tracking with stable IDs across frames · GPIO PWM → Pixhawk MAVLink control loop · Real-time edge inference on Raspberry Pi</div>
+  </div>
+  <div class="card-foot">
+    <div class="card-tags"><span class="tech-tag">TFLite</span><span class="tech-tag">OpenCV</span><span class="tech-tag">Raspberry Pi</span><span class="tech-tag">MAVLink</span><span class="tech-tag">Firebase</span></div>
+    <div class="card-links">
+      <a class="card-link" href="https://github.com/nicolemas27/drone-surveillance" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
+    </div>
+  </div>
+</div>
+
+<!-- 13. EY HACKATHON -->
+</div><!-- /projectsGrid -->
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-kicker">Experience</div>
+  <h2 class="section-title">Internships</h2>
+  <div class="exp-grid">
+    <div class="exp-item reveal">
+      <div class="exp-left"><div class="exp-period">Feb – Jun 2025</div></div>
+      <div class="exp-right">
+        <div class="exp-header">
+          <div class="exp-role-block">
+            <div class="exp-role">AI Intern</div>
+            <div class="exp-org">Cloud Counselage Pvt. Ltd. — Remote</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Researched and evaluated RAG techniques and LLM frameworks for potential business applications; assessed feasibility for internal knowledge tools.</li>
+          <li>Designed automated workflow agents with Microsoft Power Automate and MS365, reducing manual task time by an estimated 30%.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-left"><div class="exp-period">Jun – Aug 2024</div></div>
+      <div class="exp-right">
+        <div class="exp-header">
+          <div class="exp-role-block">
+            <div class="exp-role">Data Analytics Intern</div>
+            <div class="exp-org">CSRBOX (IBM SkillsBuild) — Remote</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built the India Water Quality Dashboard — Streamlit app analysing SDG 6 water data across 639 locations in 31 states with automated quality grading and Plotly visualisations.</li>
+          <li>EDA on surface and groundwater parameters (BOD, dissolved oxygen, pH) against WHO/CPCB thresholds to identify pollution patterns.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-left"><div class="exp-period">Jul – Sep 2023</div></div>
+      <div class="exp-right">
+        <div class="exp-header">
+          <div class="exp-role-block">
+            <div class="exp-role">ML Intern</div>
+            <div class="exp-org">Cloud Counselage — Remote</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Random Forest models for student placement prediction (~80% accuracy); improved precision/recall by 15% through better preprocessing and feature selection.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-left"><div class="exp-period">Jun – Aug 2023</div></div>
+      <div class="exp-right">
+        <div class="exp-header">
+          <div class="exp-role-block">
+            <div class="exp-role">Data Science Intern</div>
+            <div class="exp-org">Tanmann Foundation — Remote</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Explainable clinical decision-support tool using Random Forest with SHAP TreeExplainer — predicting patient disease outcomes with per-patient waterfall plot explanations.</li>
+          <li>Deployed as a multi-tab Streamlit app with global feature importance and an interactive data explorer.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-kicker">Education</div>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card featured">
+      <div class="edu-degree">MSc Data Science (Business & Management)</div>
+      <div class="edu-school">University of Manchester</div>
+      <div class="edu-period">2025 – 2026 · Expected Sep 2026</div>
+      <div class="edu-detail">Dissertation: Multimodal Learning for Disease Risk Prediction — fusing EHR data from MIMIC-III with LSTM + Transformer encoders for clinical outcome prediction.</div>
+      <span class="edu-badge">🏅 Global Futures Scholarship Recipient</span>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">BEng Artificial Intelligence & Data Science (Hons in Cybersecurity)</div>
+      <div class="edu-school">University of Mumbai</div>
+      <div class="edu-period">Completed May 2025</div>
+      <div class="edu-detail">First Class. ML, deep learning, data engineering, cybersecurity. Vice-captain of the SAEINDIA Aerothon drone club.</div>
+      <span class="edu-badge">First Class Honours</span>
+    </div>
+  </div>
+  <div class="awards-row reveal">
+    <div class="award-chip"><span>🥇</span>1st Place — Our-Research HR Act (DEI), 2022</div>
+    <div class="award-chip"><span>🥈</span>1st Runner-up — HR On-Boarding Role-play, 2023</div>
+    <div class="award-chip"><span>♟</span>1st Place — Chess (Intra & Inter-College, multiple years)</div>
+    <div class="award-chip"><span>🚁</span>Vice-Captain — SAEINDIA Aerothon Drone Club</div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-kicker">Credentials</div>
+  <h2 class="section-title">Certifications</h2>
+  <div class="certs-grid">
+    <div class="cert-card reveal">
+      <div class="cert-card-header">
+        <div>
+          <div class="cert-issuer">Google</div>
+          <div class="cert-title" style="margin-bottom:0">Google Advanced Data Analytics</div>
+        </div>
+      </div>
+      <div class="cert-meta"><span class="cert-date">Dec 2024</span><span class="cert-id">DAX0E6LSKRPT</span></div>
+      <div class="cert-skills"><span class="cert-skill-tag">EDA</span><span class="cert-skill-tag">Feature Engineering</span><span class="cert-skill-tag">Python</span><span class="cert-skill-tag">ML Modeling</span></div>
+      <a class="cert-link" href="https://www.coursera.org/account/accomplishments/professional-cert/certificate/DAX0E6LSKRPT" target="_blank">↗ View Credential</a>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-card-header">
+        <div>
+          <div class="cert-issuer">Google</div>
+          <div class="cert-title" style="margin-bottom:0">Google Business Intelligence</div>
+        </div>
+      </div>
+      <div class="cert-meta"><span class="cert-date">Dec 2024</span><span class="cert-id">YTWL4Q1QGKUQ</span></div>
+      <div class="cert-skills"><span class="cert-skill-tag">BI Dashboards</span><span class="cert-skill-tag">Data Pipelines</span><span class="cert-skill-tag">Visualisation</span></div>
+      <a class="cert-link" href="https://www.coursera.org/account/accomplishments/professional-cert/certificate/YTWL4Q1QGKUQ" target="_blank">↗ View Credential</a>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-card-header">
+        <div>
+          <div class="cert-issuer">IBM</div>
+          <div class="cert-title" style="margin-bottom:0">Databases and SQL for Data Science with Python</div>
+        </div>
+      </div>
+      <div class="cert-meta"><span class="cert-date">May 2023</span><span class="cert-id">CR5NSY974QYW</span></div>
+      <div class="cert-skills"><span class="cert-skill-tag">SQL</span><span class="cert-skill-tag">Databases</span><span class="cert-skill-tag">Python</span></div>
+      <a class="cert-link" href="https://www.coursera.org/account/accomplishments/records/CR5NSY974QYW" target="_blank">↗ View Credential</a>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-card-header">
+        <div>
+          <div class="cert-issuer">Infosys Springboard</div>
+          <div class="cert-title" style="margin-bottom:0">Hands-On Feature Engineering with Python</div>
+        </div>
+      </div>
+      <div class="cert-meta"><span class="cert-date">Jul 2023</span></div>
+      <div class="cert-skills"><span class="cert-skill-tag">Feature Engineering</span><span class="cert-skill-tag">Python</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-kicker">Contact</div>
+  <div class="contact-inner reveal">
+    <div class="contact-heading">Get in<span>touch.</span></div>
+    <p class="contact-sub">I'm open to opportunities across data, technology, and related fields. While my experience is rooted in Data Science, ML, and AI, I'm flexible regarding domain, role type, and working style — remote, hybrid, or on‑site. If something on this site caught your eye, let’s get in touch.
+    <span class="avail">✦ Available now · UK-based  · Open to relocation</span></p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:nicmas2719@gmail.com">
+        <span class="contact-link-label">Email</span><span class="contact-link-val">nicmas2719@gmail.com</span><span class="contact-link-arrow">→</span>
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/nicole-mascarenhas-26023024b/" target="_blank">
+        <span class="contact-link-label">LinkedIn</span><span class="contact-link-val">/in/nicole-mascarenhas-26023024b</span><span class="contact-link-arrow">→</span>
+      </a>
+      <a class="contact-link" href="https://github.com/nicolemas27" target="_blank">
+        <span class="contact-link-label">GitHub</span><span class="contact-link-val">github.com/nicolemas27</span><span class="contact-link-arrow">→</span>
+      </a>
+      <a class="contact-link" href="https://www.credly.com/users/nicole-mascarenhas.b917faaa" target="_blank">
+        <span class="contact-link-label">Credly</span><span class="contact-link-val">credly.com/users/nicole-mascarenhas</span><span class="contact-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 <span>Nicole Maria Mascarenhas</span></div>
+  <div class="footer-copy">Data Scientist · Manchester, UK</div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.borderColor='rgba(232,184,109,.5)';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(232,184,109,.35)';});
+});
+// Mobile nav
+const tog=document.getElementById('nav-toggle'),nl=document.querySelector('.nav-links');
+tog.addEventListener('click',()=>{tog.classList.toggle('open');nl.classList.toggle('open');});
+nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{tog.classList.remove('open');nl.classList.remove('open');}));
+// Featured
+const fg=document.getElementById('featuredGrid'),pg=document.getElementById('projectsGrid');
+['dissertation','fraud','learning','rag'].forEach(slug=>{
+  const c=pg.querySelector(`[data-slug="${slug}"]`);
+  if(c){const cl=c.cloneNode(true);cl.classList.add('featured-hero');cl.removeAttribute('data-slug');fg.appendChild(cl);c.style.display='none';}
+});
+// Reveal
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// Filter
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('#projectsGrid .project-card').forEach(c=>{
+      c.style.display=(f==='all'||( c.dataset.cats||'').split(' ').includes(f))?'flex':'none';
+    });
+    const band=document.querySelector('.featured-band'),div=document.querySelector('.projects-divider');
+    if(band)band.style.display=f==='all'?'':'none';
+    if(div)div.style.display=f==='all'?'':'none';
+  });
+});
+</script>
+</body>
+</html>
