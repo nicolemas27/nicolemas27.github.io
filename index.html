@@ -54,6 +54,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-links a:hover{color:var(--accent);}
 .nav-right{display:flex;align-items:center;gap:1rem;}
 .nav-status{display:flex;align-items:center;gap:.45rem;font-size:.7rem;font-family:var(--font-mono);color:var(--text3);}
+.nav-cv-btn{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--bg);background:var(--accent);padding:.5rem 1.1rem;border-radius:4px;text-decoration:none;transition:background .2s,transform .2s;white-space:nowrap;}
+.nav-cv-btn:hover{background:var(--teal);transform:translateY(-1px);}
 .status-dot{width:6px;height:6px;border-radius:50%;background:#06b6d4;animation:pulse 2.5s ease-in-out infinite;box-shadow:0 0 6px #06b6d4;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 #nav-toggle{display:none;background:none;border:none;flex-direction:column;gap:5px;padding:4px;}
@@ -127,9 +129,9 @@ section{position:relative;z-index:1;padding:7rem 3rem;}
 .sk-viz{color:var(--coral)}.sk-viz .dot{background:var(--coral);}
 .sk-tools{color:var(--purple)}.sk-tools .dot{background:var(--purple);}
 .skill-tags-wrap{padding:1rem 1.25rem;display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center;}
-.stag{font-size:.72rem;font-family:var(--font-mono);padding:.28rem .6rem;border:1px solid var(--border);color:var(--text2);background:rgba(255,255,255,.02);border-radius:2px;transition:all .18s;}
-.stag.core{border-color:var(--border2);color:var(--text);background:var(--surface);}
-.skill-row:hover .stag.core{border-color:rgba(59,130,246,.35);color:var(--accent);}
+.stag{font-size:.78rem;font-family:'Esteban',Georgia,serif;padding:.3rem .75rem;border:none;color:#1a4fa0;background:rgba(59,130,246,.1);border-radius:20px;transition:all .18s;}
+.stag.core{color:#0e7490;background:rgba(6,182,212,.1);}
+.skill-row:hover .stag.core{background:rgba(6,182,212,.16);}
 
 /* projects */
 #projects{background:var(--light-bg2);border-top:2px solid var(--light-border);color:var(--light-text);}
@@ -176,10 +178,16 @@ section{position:relative;z-index:1;padding:7rem 3rem;}
 .card-body{padding:1.25rem 1.25rem 0;flex:1;display:flex;flex-direction:column;}
 .card-title{font-family:'Lora',Georgia,serif;font-size:1rem;line-height:1.4;margin-bottom:.65rem;color:var(--light-text);font-weight:600;font-style:italic;letter-spacing:-.01em;}
 .card-story{font-family:'Esteban',Georgia,serif;font-size:.87rem;color:#4a5a80;line-height:1.6;font-weight:400;margin-bottom:.85rem;flex:1;}
-.card-impact{background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.2);border-left:3px solid var(--accent);padding:.45rem .75rem;margin-bottom:1rem;border-radius:2px;font-size:.68rem;font-family:var(--font-mono);color:#2a5aaa;line-height:1.4;letter-spacing:.02em;}
+.card-impact{display:flex;gap:.85rem;align-items:center;margin-bottom:1rem;}
+.card-impact .stat-num{font-family:'Lora',Georgia,serif;font-style:italic;font-size:1.7rem;color:var(--accent);line-height:1;flex-shrink:0;}
+.card-impact .stat-cap{font-family:'Esteban',Georgia,serif;font-size:.72rem;color:var(--light-text3);line-height:1.4;}
+.card-impact-text{font-family:'Esteban',Georgia,serif;font-size:.82rem;color:var(--light-text2);line-height:1.6;margin-bottom:1rem;padding-left:.85rem;border-left:2px solid rgba(59,130,246,.3);}
+.impact-kicker{display:block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.35rem;}
+.impact-kicker.status{color:#e0793f;}
 .card-foot{padding:.85rem 1.25rem 1.25rem;border-top:1px solid var(--light-border);display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
-.card-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
-.tech-tag{font-size:.63rem;font-family:var(--font-mono);padding:.2rem .5rem;border:1px solid var(--light-border);color:var(--light-text3);border-radius:2px;}
+.card-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.tech-tag{font-size:.72rem;font-family:'Esteban',Georgia,serif;padding:.28rem .7rem;border:none;border-radius:20px;color:#1a4fa0;background:rgba(59,130,246,.08);}
+.tech-tag.alt{color:#0e7490;background:rgba(6,182,212,.08);}
 .card-links{display:flex;gap:.5rem;flex-shrink:0;}
 .card-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.7rem;font-family:var(--font-mono);color:var(--light-text3);text-decoration:none;padding:.3rem .6rem;border:1px solid var(--light-border);border-radius:2px;transition:all .2s;}
 .card-link:hover{color:var(--accent);border-color:var(--accent);}
@@ -228,9 +236,13 @@ section{position:relative;z-index:1;padding:7rem 3rem;}
 .edu-detail{font-family:'Lora',Georgia,serif;font-size:.88rem;color:var(--light-text2);line-height:1.7;font-weight:400;font-style:normal;margin-bottom:.65rem;}
 .edu-badge{display:inline-block;font-size:.78rem;padding:.35rem .85rem;border-radius:2px;background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);color:#1a4fa0;font-family:'Esteban',Georgia,serif;font-weight:400;}
 .edu-badge.badge-scholarship{background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.25);border-left:3px solid #06b6d4;color:#0e7490;}
-.awards-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.5rem;}
-.award-chip{display:flex;align-items:center;gap:.6rem;padding:.65rem 1.1rem;border:1px solid var(--light-border);border-left:3px solid var(--accent);border-radius:2px;background:var(--light-bg);font-size:.85rem;font-family:'Esteban',Georgia,serif;color:var(--light-text2);transition:all .2s;box-shadow:none;}
-.award-chip:hover{border-color:#a8c0ee;}
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-top:2.5rem;}
+.award-card{position:relative;background:var(--light-bg);border:1px solid var(--light-border);border-radius:2px;padding:.85rem .9rem;box-shadow:0 2px 0 var(--light-border),0 4px 12px rgba(0,0,0,.05);transition:all .2s cubic-bezier(.2,.8,.2,1);overflow:hidden;display:flex;gap:.7rem;align-items:flex-start;}
+.award-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--aw-color,var(--accent));}
+.award-card:hover{transform:translateY(-3px);box-shadow:0 2px 0 var(--light-border2),0 10px 22px rgba(59,130,246,.12);}
+.award-card svg{width:18px;height:18px;color:var(--aw-color,var(--accent));flex-shrink:0;margin-top:.1rem;}
+.award-card-title{font-family:'Lora',Georgia,serif;font-style:italic;font-weight:600;font-size:.8rem;color:var(--light-text);line-height:1.3;margin-bottom:.25rem;}
+.award-card-meta{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.05em;color:var(--light-text3);}
 
 /* certifications */
 #certifications{background:var(--bg2);}
@@ -245,8 +257,8 @@ section{position:relative;z-index:1;padding:7rem 3rem;}
 .cert-title{font-family:'Lora',Georgia,serif;font-size:.98rem;margin-bottom:.75rem;line-height:1.4;flex:1;color:var(--light-text);font-weight:600;font-style:italic;letter-spacing:-.01em;}
 .cert-meta{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:.75rem;}
 .cert-date,.cert-id{font-size:.7rem;color:var(--light-text3);font-family:var(--font-mono);}
-.cert-skills{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.85rem;}
-.cert-skill-tag{font-size:.65rem;font-family:var(--font-mono);padding:.2rem .5rem;border:1px solid var(--light-border);color:var(--light-text3);border-radius:2px;}
+.cert-skills{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.85rem;}
+.cert-skill-tag{font-size:.7rem;font-family:'Esteban',Georgia,serif;padding:.26rem .65rem;border:none;color:#1a4fa0;background:rgba(59,130,246,.08);border-radius:20px;}
 .cert-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.7rem;font-family:var(--font-mono);color:var(--light-text3);text-decoration:none;transition:color .2s;margin-top:auto;}
 .cert-link:hover{color:var(--accent);}
 
@@ -282,6 +294,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   #nav-toggle.open span:nth-child(2){opacity:0;}
   #nav-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px);}
   .nav-status{display:none;}
+  .nav-cv-btn{font-size:.65rem;padding:.4rem .85rem;}
   section{padding:4.5rem 1.25rem;}
   #hero{padding-bottom:4rem;}
   .hero-content{padding:0 1.25rem;}
@@ -311,6 +324,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="nav-right">
     <button id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     <div class="nav-status"><div class="status-dot"></div>Open to roles</div>
+    <a class="nav-cv-btn" href="https://drive.google.com/file/d/1X1J3Z9SGGW8_0IOu_GpET-oG1nnT7X04/view?usp=sharing" target="_blank" rel="noopener">CV</a>
   </div>
 </nav>
 
@@ -327,7 +341,6 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <ellipse cx="430" cy="540" rx="600" ry="400" fill="url(#hg1)"/>
       <ellipse cx="1150" cy="270" rx="500" ry="350" fill="url(#hg2)"/>
       <ellipse cx="860" cy="720" rx="400" ry="300" fill="url(#hg3)"/>
-      <!-- subtle grid -->
       <g stroke="#1e2a3e" stroke-width=".5" opacity=".6">
         <line x1="0" y1="150" x2="1440" y2="150"/><line x1="0" y1="300" x2="1440" y2="300"/>
         <line x1="0" y1="450" x2="1440" y2="450"/><line x1="0" y1="600" x2="1440" y2="600"/>
@@ -336,7 +349,6 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
         <line x1="720" y1="0" x2="720" y2="900"/><line x1="960" y1="0" x2="960" y2="900"/>
         <line x1="1200" y1="0" x2="1200" y2="900"/>
       </g>
-      <!-- floating dots -->
       <circle cx="180" cy="200" r="2" fill="#3b82f6" opacity=".5"/>
       <circle cx="1260" cy="450" r="3" fill="#5b8dee" opacity=".4"/>
       <circle cx="700" cy="100" r="1.5" fill="#4ecdc4" opacity=".5"/>
@@ -471,11 +483,8 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <rect width="400" height="150" fill="#0b1320"/>
       <defs><linearGradient id="dg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5b8dee" stop-opacity=".4"/><stop offset="100%" stop-color="#4ecdc4" stop-opacity=".2"/></linearGradient></defs>
       <rect width="400" height="150" fill="url(#dg1)"/>
-      <!-- ECG/vitals line -->
       <polyline points="0,90 40,90 55,45 65,120 80,75 95,75 130,90 155,90 175,30 185,115 200,75 220,75 260,90 400,90" stroke="#5b8dee" stroke-width="1.8" fill="none" opacity=".7"/>
-      <!-- heartbeat pulse -->
       <circle cx="175" cy="30" r="4" fill="#5b8dee" opacity=".8"/>
-      <!-- DNA helix hint -->
       <g opacity=".25" stroke="#4ecdc4" stroke-width="1">
         <path d="M320,20 Q345,40 320,60 Q295,80 320,100 Q345,120 320,140" fill="none"/>
         <path d="M340,20 Q315,40 340,60 Q365,80 340,100 Q315,120 340,140" fill="none"/>
@@ -483,7 +492,6 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
         <line x1="320" y1="80" x2="340" y2="80"/><line x1="320" y1="100" x2="340" y2="100"/>
         <line x1="320" y1="120" x2="340" y2="120"/>
       </g>
-      <!-- text label -->
       <text x="20" y="135" fill="#5b8dee" font-size="9" font-family="monospace" opacity=".5">MIMIC-III · EHR · Multimodal Fusion</text>
     </svg>
     <div class="card-banner-overlay"></div>
@@ -493,10 +501,10 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="card-body">
     <div class="card-title">Multimodal Learning for Disease Risk Prediction</div>
     <div class="card-story">MIMIC-III is a de-identified ICU database from Beth Israel Deaconess Medical Center in Boston, 58,000 admissions, over a decade of critical care records.<br><br>My dissertation builds a model that reads all four data types together: patient demographics, timestamped vitals, clinical events, and free-text doctor notes. LSTM and Transformer encoders handle each stream, connected by cross-attention, then jointly predict mortality, length of stay, and clinical phenotypes in one pass.</div>
-    <div class="card-impact">In progress · Beth Israel Deaconess ICU data · Multi-task across 3 clinical outcomes</div>
+    <div class="card-impact-text"><span class="impact-kicker status">In progress</span>Architecture designed to jointly predict 3 clinical outcomes — mortality, length of stay, and phenotypes — not yet finalised or evaluated.</div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">PyTorch</span><span class="tech-tag">MIMIC-III</span><span class="tech-tag">Transformers</span><span class="tech-tag">Cross-Attention</span></div>
+    <div class="card-tags"><span class="tech-tag">PyTorch</span><span class="tech-tag alt">MIMIC-III</span><span class="tech-tag">Transformers</span><span class="tech-tag alt">Cross-Attention</span></div>
   </div>
 </div>
 
@@ -507,20 +515,17 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <rect width="400" height="150" fill="#100e0a"/>
       <defs><linearGradient id="fg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity=".3"/><stop offset="100%" stop-color="#f07878" stop-opacity=".15"/></linearGradient></defs>
       <rect width="400" height="150" fill="url(#fg1)"/>
-      <!-- bar chart of transactions -->
       <rect x="30" y="80" width="16" height="50" fill="#3b82f6" opacity=".3" rx="1"/>
       <rect x="54" y="60" width="16" height="70" fill="#3b82f6" opacity=".35" rx="1"/>
       <rect x="78" y="50" width="16" height="80" fill="#3b82f6" opacity=".4" rx="1"/>
       <rect x="102" y="70" width="16" height="60" fill="#3b82f6" opacity=".3" rx="1"/>
-      <!-- FRAUD flagged bars in red -->
       <rect x="126" y="20" width="16" height="110" fill="#f07878" opacity=".7" rx="1"/>
       <text x="134" y="16" fill="#f07878" font-size="8" text-anchor="middle" font-family="monospace">!</text>
       <rect x="150" y="65" width="16" height="65" fill="#3b82f6" opacity=".3" rx="1"/>
       <rect x="174" y="40" width="16" height="90" fill="#3b82f6" opacity=".35" rx="1"/>
-      <!-- PR-AUC arc -->
       <circle cx="300" cy="75" r="45" fill="none" stroke="#3b82f6" stroke-width="1" opacity=".1"/>
       <circle cx="300" cy="75" r="45" fill="none" stroke="#3b82f6" stroke-width="3" opacity=".6" stroke-dasharray="254" stroke-dashoffset="25" stroke-linecap="round"/>
-      <text x="300" y="70" fill="#3b82f6" font-size="16" font-weight="bold" text-anchor="middle" font-family="monospace">0.94</text>
+      <text x="300" y="70" fill="#3b82f6" font-size="16" font-weight="bold" text-anchor="middle" font-family="monospace">0.86</text>
       <text x="300" y="85" fill="#3b82f6" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">PR-AUC</text>
       <text x="20" y="143" fill="#3b82f6" font-size="8" font-family="monospace" opacity=".4">SDK.finance · Industry-Mentored</text>
     </svg>
@@ -530,11 +535,11 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   </div>
   <div class="card-body">
     <div class="card-title">Fraud Detection for SDK.finance</div>
-    <div class="card-story">Developed in collaboration with SDK.finance as an industry partner.<br><br>Two-stage pipeline: Isolation Forest flags the suspicious top 10% first, then H2O GLM scores each one with an interpretable probability. Outcome: 77% of fraud caught at a precision that keeps false positives manageable. Deployed as a Streamlit fraud detection dashboard.</div>
-    <div class="card-impact">77% fraud recall · 90% queue reduction · PR-AUC 0.94 on filtered subset</div>
+    <div class="card-story">Developed in collaboration with SDK.finance as an industry partner, on 284K real credit card transactions and 6.3M PaySim synthetic records.<br><br>Two-stage pipeline: Isolation Forest flags the suspicious top 10% first, then H2O GLM scores each one with an interpretable probability. Financially interpretable features were engineered to avoid data leakage. Deployed end-to-end as a Streamlit investigation console with tiered risk decisions (approve / monitor / block).</div>
+    <div class="card-impact"><span class="stat-num">77%</span><span class="stat-cap">fraud recall at PR-AUC 0.86, cutting the review queue by 90%</span></div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">Isolation Forest</span><span class="tech-tag">H2O GLM</span><span class="tech-tag">scikit-learn</span></div>
+    <div class="card-tags"><span class="tech-tag">Isolation Forest</span><span class="tech-tag alt">H2O GLM</span><span class="tech-tag">scikit-learn</span></div>
   </div>
 </div>
 
@@ -545,21 +550,17 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <rect width="400" height="150" fill="#090d14"/>
       <defs><linearGradient id="lg1" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#b39ddb" stop-opacity=".3"/><stop offset="100%" stop-color="#4ecdc4" stop-opacity=".2"/></linearGradient></defs>
       <rect width="400" height="150" fill="url(#lg1)"/>
-      <!-- Ebbinghaus forgetting curve -->
       <path d="M30,30 Q80,35 120,55 Q180,80 240,100 Q300,115 400,125" stroke="#b39ddb" stroke-width="1.5" fill="none" opacity=".6"/>
-      <!-- spaced rep review dots on curve -->
       <circle cx="60" cy="32" r="4" fill="#4ecdc4" opacity=".9"/>
       <circle cx="130" cy="58" r="4" fill="#4ecdc4" opacity=".8"/>
       <circle cx="210" cy="88" r="4" fill="#4ecdc4" opacity=".8"/>
       <circle cx="300" cy="113" r="4" fill="#4ecdc4" opacity=".7"/>
-      <!-- vertical review lines -->
       <line x1="60" y1="32" x2="60" y2="130" stroke="#4ecdc4" stroke-width=".8" opacity=".3" stroke-dasharray="3,3"/>
       <line x1="130" y1="58" x2="130" y2="130" stroke="#4ecdc4" stroke-width=".8" opacity=".3" stroke-dasharray="3,3"/>
       <line x1="210" y1="88" x2="210" y2="130" stroke="#4ecdc4" stroke-width=".8" opacity=".3" stroke-dasharray="3,3"/>
-      <!-- label -->
-      <text x="320" y="45" fill="#b39ddb" font-size="9" font-family="monospace" opacity=".6">Ebbinghaus</text>
-      <text x="320" y="57" fill="#4ecdc4" font-size="9" font-family="monospace" opacity=".6">ACT-R</text>
-      <text x="320" y="69" fill="#5b8dee" font-size="9" font-family="monospace" opacity=".6">ML model</text>
+      <text x="320" y="45" fill="#b39ddb" font-size="9" font-family="monospace" opacity=".6">BKT</text>
+      <text x="320" y="57" fill="#4ecdc4" font-size="9" font-family="monospace" opacity=".6">IRT</text>
+      <text x="320" y="69" fill="#5b8dee" font-size="9" font-family="monospace" opacity=".6">Spaced Rep.</text>
       <text x="20" y="143" fill="#b39ddb" font-size="8" font-family="monospace" opacity=".4">A/B tested · Flask · MongoDB · D3.js</text>
     </svg>
     <div class="card-banner-overlay"></div>
@@ -567,12 +568,12 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
     <span class="card-year">Jul 2024 – May 2025</span>
   </div>
   <div class="card-body">
-    <div class="card-title">AI Enhanced Learning Platform</div>
-    <div class="card-story">Converts YouTube videos into adaptive study tools: quizzes, flashcards, summaries, and concept graphs.<br><br>Three memory models (Ebbinghaus, ACT-R, and an ML-based one) were A/B tested head-to-head for retention. Quiz difficulty adjusts in real-time based on how you're actually performing.</div>
-    <div class="card-impact">3 memory models A/B tested with statistical significance · Adaptive difficulty from live performance data</div>
+    <div class="card-title">AI-Enhanced Learning Platform — LearnTube</div>
+    <div class="card-story">Turns any YouTube video into a personalised study session — quizzes, flashcards, summaries, and a concept map — driven by three adaptive models running in parallel per learner.<br><br>Bayesian Knowledge Tracing treats mastery as a hidden variable and updates it after every answer. A 3-parameter IRT engine selects each next question by maximising Fisher information at the learner's estimated ability. Three competing forgetting-curve models — Ebbinghaus, ACT-R, and a personalised BayesianRidge — race to predict the optimal review date, scored on held-out MAE/RMSE. Teaching-strategy experiments run through a proper A/B pipeline: power analysis before launch, Holm–Bonferroni correction, and Cohen's d effect sizes.</div>
+    <div class="card-impact"><span class="stat-num">29</span><span class="stat-cap">unit tests covering the adaptive engine, plus a Chrome extension for in-browser quizzing</span></div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">Flask</span><span class="tech-tag">MongoDB</span><span class="tech-tag">Gemini API</span><span class="tech-tag">spaCy</span><span class="tech-tag">D3.js</span></div>
+    <div class="card-tags"><span class="tech-tag">Flask</span><span class="tech-tag alt">MongoDB</span><span class="tech-tag">Gemini API</span><span class="tech-tag alt">IRT / BKT</span><span class="tech-tag">D3.js</span></div>
     <div class="card-links">
       <a class="card-link" href="https://github.com/nicolemas27/AI-Enhanced-Learning-Platform" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
     </div>
@@ -602,10 +603,10 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="card-body">
     <div class="card-title">Disease Outcome Predictor (SHAP)</div>
     <div class="card-story">Built during my internship at Tannmann Foundation. It predicts patient disease outcomes from symptom profiles (fever, breathing difficulty, blood pressure, cholesterol).<br><br>Every prediction is explained using SHAP TreeExplainer with per-patient waterfall charts. Deployed as an interactive web app with global feature importance and a per-patient data explorer.</div>
-    <div class="card-impact">Per-patient SHAP waterfall charts · Global feature importance · Full explainability via SHAP</div>
+    <div class="card-impact"><span class="stat-num">100%</span><span class="stat-cap">of predictions explained via per-patient SHAP waterfall charts</span></div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">Python</span><span class="tech-tag">Random Forest</span><span class="tech-tag">SHAP</span><span class="tech-tag">scikit-learn</span></div>
+    <div class="card-tags"><span class="tech-tag">Python</span><span class="tech-tag alt">Random Forest</span><span class="tech-tag">SHAP</span><span class="tech-tag alt">scikit-learn</span></div>
     <div class="card-links">
       <a class="card-link" href="https://github.com/nicolemas27/Consultant-Platform" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
     </div>
@@ -617,7 +618,6 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <rect width="400" height="150" fill="#0a100e"/>
       <defs><linearGradient id="rg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4ecdc4" stop-opacity=".25"/><stop offset="100%" stop-color="#5b8dee" stop-opacity=".15"/></linearGradient></defs>
       <rect width="400" height="150" fill="url(#rg1)"/>
-      <!-- RAG pipeline diagram -->
       <rect x="20" y="55" width="70" height="30" rx="3" fill="#4ecdc4" fill-opacity=".1" stroke="#4ecdc4" stroke-width="1" stroke-opacity=".4"/>
       <text x="55" y="66" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".8">450+ docs</text>
       <text x="55" y="78" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".6">Wikipedia</text>
@@ -642,10 +642,10 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="card-body">
     <div class="card-title">RAG Cuisine Agent</div>
     <div class="card-story">A full retrieval-augmented generation pipeline for South Asian cuisine QA. Scraped 450+ docs from Wikipedia, Wikibooks, and food blogs with adaptive chunking per source type.<br><br>Hybrid retrieval: BGE-large dense vectors (FAISS) weighted 60% + BM25 sparse 40%, then re-ranked by a cross-encoder before hitting Qwen2.5 with chain-of-thought prompting.</div>
-    <div class="card-impact">Hybrid dense+sparse retrieval · Cross-encoder re-ranking · CoT vs zero-shot vs few-shot compared</div>
+    <div class="card-impact"><span class="stat-num">450+</span><span class="stat-cap">docs indexed with hybrid dense + sparse retrieval, cross-encoder re-ranked</span></div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">FAISS</span><span class="tech-tag">BGE</span><span class="tech-tag">BM25</span><span class="tech-tag">Cross-Encoder</span><span class="tech-tag">Qwen2.5</span></div>
+    <div class="card-tags"><span class="tech-tag">FAISS</span><span class="tech-tag alt">BGE</span><span class="tech-tag">BM25</span><span class="tech-tag alt">Cross-Encoder</span><span class="tech-tag">Qwen2.5</span></div>
   </div>
 </div>
 
@@ -672,10 +672,10 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="card-body">
     <div class="card-title">EY Open Science Data Challenge 2026</div>
     <div class="card-story">Given ~200 river locations across South Africa, we had to predict water quality: Total Alkalinity, Electrical Conductance, Dissolved Reactive Phosphorus, for completely unseen locations.<br><br>Features came from Landsat spectral bands, TerraClimate climate variables, land cover fractions, and terrain data. We trained CatBoost, LightGBM, and XGBoost with Optuna tuning and built an ensemble.</div>
-    <div class="card-impact">Spatial leakage diagnosed via SHAP · GroupShuffleSplit, region-clustered CV · CatBoost + LightGBM + XGBoost ensemble</div>
+    <div class="card-impact-text"><span class="impact-kicker">Key detail</span>Diagnosed spatial leakage via SHAP before finalising the CatBoost/LightGBM/XGBoost ensemble for unseen locations.</div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">CatBoost</span><span class="tech-tag">LightGBM</span><span class="tech-tag">XGBoost</span><span class="tech-tag">Optuna</span><span class="tech-tag">SHAP</span><span class="tech-tag">Landsat</span></div>
+    <div class="card-tags"><span class="tech-tag">CatBoost</span><span class="tech-tag alt">LightGBM</span><span class="tech-tag">XGBoost</span><span class="tech-tag alt">Optuna</span><span class="tech-tag">SHAP</span><span class="tech-tag alt">Landsat</span></div>
   </div>
 </div>
 
@@ -686,22 +686,18 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <rect width="400" height="150" fill="#090c14"/>
       <defs><linearGradient id="ng1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5b8dee" stop-opacity=".2"/><stop offset="100%" stop-color="#b39ddb" stop-opacity=".2"/></linearGradient></defs>
       <rect width="400" height="150" fill="url(#ng1)"/>
-      <!-- LSTM cell diagram -->
       <rect x="40" y="40" width="80" height="65" rx="4" fill="none" stroke="#5b8dee" stroke-width="1" opacity=".5"/>
       <text x="80" y="62" fill="#5b8dee" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">Bi-LSTM</text>
       <text x="80" y="74" fill="#5b8dee" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">2M+ seqs</text>
       <text x="80" y="86" fill="#5b8dee" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">GloVe 300d</text>
-      <!-- arrow to attention -->
       <path d="M120,72 L150,72" stroke="#5b8dee" stroke-width="1.2" opacity=".5" marker-end="url(#arr2)"/>
       <rect x="150" y="45" width="70" height="55" rx="4" fill="none" stroke="#b39ddb" stroke-width="1" opacity=".5"/>
       <text x="185" y="68" fill="#b39ddb" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">Attention</text>
       <text x="185" y="80" fill="#b39ddb" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">custom</text>
-      <!-- arrow to softmax -->
       <path d="M220,72 L250,72" stroke="#b39ddb" stroke-width="1.2" opacity=".5"/>
       <rect x="250" y="50" width="65" height="45" rx="4" fill="none" stroke="#4ecdc4" stroke-width="1" opacity=".5"/>
       <text x="282" y="72" fill="#4ecdc4" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">Softmax</text>
       <text x="282" y="84" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">next word</text>
-      <!-- temperature sampling note -->
       <text x="345" y="60" fill="#3b82f6" font-size="7" font-family="monospace" opacity=".5">temp</text>
       <text x="345" y="72" fill="#3b82f6" font-size="7" font-family="monospace" opacity=".5">sampling</text>
       <text x="20" y="143" fill="#5b8dee" font-size="8" font-family="monospace" opacity=".4">Streamlit live demo · Classic literature corpus</text>
@@ -713,10 +709,10 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="card-body">
     <div class="card-title">Next Word Predictor with LSTM & Attention</div>
     <div class="card-story">Language model trained on 2M+ sequences from classic literature: iterated from vanilla LSTM, to bidirectional LSTM, to a custom attention mechanism, to GloVe 300-dim transfer learning. Temperature sampling lets you dial the creativity up or down. There's a live Streamlit demo you can actually try.</div>
-    <div class="card-impact">GloVe transfer learning · Custom attention mechanism</div>
+    <div class="card-impact"><span class="stat-num">2M+</span><span class="stat-cap">training sequences, with GloVe transfer learning and a custom attention mechanism</span></div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">TensorFlow</span><span class="tech-tag">Bi-LSTM</span><span class="tech-tag">GloVe</span><span class="tech-tag">Attention</span></div>
+    <div class="card-tags"><span class="tech-tag">TensorFlow</span><span class="tech-tag alt">Bi-LSTM</span><span class="tech-tag">GloVe</span><span class="tech-tag alt">Attention</span></div>
     <div class="card-links">
       <a class="card-link" href="https://github.com/nicolemas27/Next-Word-Prediction" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
       <a class="card-link live" href="https://next-word-prediction-text.streamlit.app/" target="_blank">↗ Live</a>
@@ -731,16 +727,13 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <rect width="400" height="150" fill="#090c0a"/>
       <defs><linearGradient id="prg" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#58d68d" stop-opacity=".2"/><stop offset="100%" stop-color="#3b82f6" stop-opacity=".15"/></linearGradient></defs>
       <rect width="400" height="150" fill="url(#prg)"/>
-      <!-- efficient frontier curve -->
       <path d="M50,130 Q80,110 110,85 Q150,55 200,40 Q250,28 310,25 Q350,24 390,26" stroke="#58d68d" stroke-width="2" fill="none" opacity=".6"/>
-      <!-- scatter dots (portfolios) -->
       <circle cx="120" cy="90" r="3" fill="#5b8dee" opacity=".5"/>
       <circle cx="160" cy="65" r="3" fill="#5b8dee" opacity=".5"/>
       <circle cx="200" cy="50" r="4" fill="#3b82f6" opacity=".8"/>
       <text x="206" y="46" fill="#3b82f6" font-size="7" font-family="monospace" opacity=".8">optimal</text>
       <circle cx="240" cy="40" r="3" fill="#5b8dee" opacity=".5"/>
       <circle cx="280" cy="32" r="3" fill="#5b8dee" opacity=".5"/>
-      <!-- axis labels -->
       <text x="55" y="145" fill="#58d68d" font-size="8" font-family="monospace" opacity=".5">risk →</text>
       <text x="15" y="80" fill="#58d68d" font-size="8" font-family="monospace" opacity=".5" transform="rotate(-90,15,80)">return →</text>
       <text x="220" y="143" fill="#3b82f6" font-size="7" font-family="monospace" opacity=".4">–8.85% → –3.10% with bond allocation</text>
@@ -752,47 +745,14 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="card-body">
     <div class="card-title">Portfolio Risk & Optimisation Engine</div>
     <div class="card-story">Downloads live market data and calculates risk metrics: VaR, CVaR, Sharpe ratio, and maximum drawdown. Runs Monte Carlo simulation to construct the Efficient Frontier and find optimal allocations. Benchmarks against the S&amp;P 500 (alpha and beta), and stress-tests against crash scenarios.<br><br>Key finding: adding a 40% bond allocation cut simulated Tech Meltdown losses from –8.85% to –3.10%.</div>
-    <div class="card-impact">Monte Carlo optimisation · VaR & CVaR · Scenario stress testing</div>
+    <div class="card-impact"><span class="stat-num">65%</span><span class="stat-cap">smaller simulated crash loss (–8.85% → –3.10%) with a 40% bond allocation</span></div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">Python</span><span class="tech-tag">NumPy</span><span class="tech-tag">Pandas</span><span class="tech-tag">yfinance</span><span class="tech-tag">SciPy</span></div>
+    <div class="card-tags"><span class="tech-tag">Python</span><span class="tech-tag alt">NumPy</span><span class="tech-tag">Pandas</span><span class="tech-tag alt">yfinance</span><span class="tech-tag">SciPy</span></div>
     <div class="card-links">
       <a class="card-link" href="https://github.com/nicolemas27/Portfolio-risk-optimization" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
       <a class="card-link live" href="https://portfolio-risk-optimization.streamlit.app/" target="_blank">↗ Live</a>
     </div>
-  </div>
-</div>
-
-<!-- 12. DRONE SURVEILLANCE -->
-<div class="project-card reveal" data-cats="dl ml">
-  <div class="card-banner">
-    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <rect width="400" height="150" fill="#0a0c0a"/>
-      <defs><linearGradient id="wg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#58d68d" stop-opacity=".1"/><stop offset="100%" stop-color="#58d68d" stop-opacity=".0"/></linearGradient></defs>
-      <!-- candlestick chart -->
-      <g opacity=".6">
-        <line x1="40" y1="45" x2="40" y2="100" stroke="#f07878" stroke-width="1"/><rect x="35" y="55" width="10" height="30" fill="#f07878"/>
-        <line x1="70" y1="40" x2="70" y2="95" stroke="#58d68d" stroke-width="1"/><rect x="65" y="50" width="10" height="25" fill="#58d68d"/>
-        <line x1="100" y1="50" x2="100" y2="105" stroke="#f07878" stroke-width="1"/><rect x="95" y="62" width="10" height="28" fill="#f07878"/>
-        <line x1="130" y1="35" x2="130" y2="90" stroke="#58d68d" stroke-width="1"/><rect x="125" y="45" width="10" height="30" fill="#58d68d"/>
-        <line x1="160" y1="48" x2="160" y2="98" stroke="#58d68d" stroke-width="1"/><rect x="155" y="55" width="10" height="26" fill="#58d68d"/>
-      </g>
-      <!-- GAN synthetic overlay -->
-      <path d="M200,75 Q220,50 240,70 Q260,90 280,55 Q300,35 320,65 Q340,80 360,60 Q380,45 400,70" stroke="#3b82f6" stroke-width="1.5" fill="url(#wg1)" opacity=".7"/>
-      <text x="205" y="35" fill="#3b82f6" font-size="8" font-family="monospace" opacity=".6">synthetic (GAN)</text>
-      <text x="20" y="143" fill="#58d68d" font-size="8" font-family="monospace" opacity=".4">WaveNet GAN · Dilated Convolutions · Google Stock</text>
-    </svg>
-    <div class="card-banner-overlay"></div>
-    <span class="card-type-badge dl">Deep Learning</span>
-    <span class="card-year">2024</span>
-  </div>
-  <div class="card-body">
-    <div class="card-title">WaveNet GAN: Synthetic Stock Price Generation</div>
-    <div class="card-story">I built a GAN that generates realistic synthetic Google stock price sequences, the kind of data you'd use to test trading strategies without touching real markets.<br><br>The generator uses stacked dilated convolutions to pick up patterns at multiple timescales; the discriminator learns to spot fakes. Checked the output against real historical volatility using MAE and visual inspection.</div>
-    <div class="card-impact">Dilated convolutions for multi-scale temporal patterns · GAN stability via gradient clipping</div>
-  </div>
-  <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">TensorFlow</span><span class="tech-tag">GANs</span><span class="tech-tag">WaveNet</span><span class="tech-tag">Dilated Convolutions</span></div>
   </div>
 </div>
 
@@ -818,10 +778,10 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="card-body">
     <div class="card-title">India Water Quality Dashboard (SDG 6)</div>
     <div class="card-story">Built during my CSRBOX internship.<br><br>An interactive Streamlit dashboard analysing water quality data across 639 monitoring locations in 31 Indian states. Automated A–F grading against WHO and CPCB thresholds, Plotly visualisations, and EDA on BOD, dissolved oxygen, pH, and fecal coliform to identify pollution patterns.</div>
-    <div class="card-impact">639 locations · 31 states · Automated quality grading · SDG 6 aligned</div>
+    <div class="card-impact"><span class="stat-num">639</span><span class="stat-cap">monitoring locations across 31 Indian states, auto-graded against WHO / CPCB thresholds</span></div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">Python</span><span class="tech-tag">Streamlit</span><span class="tech-tag">Plotly</span><span class="tech-tag">Pandas</span></div>
+    <div class="card-tags"><span class="tech-tag">Python</span><span class="tech-tag alt">Streamlit</span><span class="tech-tag">Plotly</span><span class="tech-tag alt">Pandas</span></div>
     <div class="card-links">
       <a class="card-link" href="https://github.com/nicolemas27/India-water-quality-analysis" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
       <a class="card-link live" href="https://india-water-quality-analysis-123456.streamlit.app/" target="_blank">↗ Live</a>
@@ -840,8 +800,8 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <rect x="190" y="80" width="30" height="60" rx="2" fill="#a78bfa" opacity=".5"/>
       <rect x="240" y="40" width="30" height="100" rx="2" fill="#00d4ff" opacity=".8"/>
       <rect x="290" y="65" width="30" height="75" rx="2" fill="#a78bfa" opacity=".5"/>
-      <text x="40" y="30" fill="#a78bfa" font-size="8" font-family="monospace" opacity=".5">engagement prediction · PySpark MLlib</text>
-      <text x="40" y="42" fill="#00d4ff" font-size="7" font-family="monospace" opacity=".4">6.3M records · distributed compute</text>
+      <text x="40" y="30" fill="#a78bfa" font-size="8" font-family="monospace" opacity=".5">engagement prediction · PySpark EDA</text>
+      <text x="40" y="42" fill="#00d4ff" font-size="7" font-family="monospace" opacity=".4">100K posts · XGBoost R² 0.9992</text>
     </svg>
     <div class="card-banner-overlay"></div>
     <span class="card-type-badge ml">ML · Big Data</span>
@@ -849,122 +809,18 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   </div>
   <div class="card-body">
     <div class="card-title">PySpark Social Media Engagement Predictor</div>
-    <div class="card-story">Predicting social media engagement at scale using PySpark MLlib on 6.3M records distributed across HDFS.<br><br>Compared Logistic Regression, Random Forest, and Gradient Boosting in a distributed compute environment.</div>
-    <div class="card-impact">6.3M records · Distributed ML on HDFS · 3 models benchmarked</div>
+    <div class="card-story">Distributed EDA and feature engineering in PySpark on 100K social media posts, feeding a production scikit-learn pipeline.<br><br>Benchmarked a Linear Regression baseline against XGBoost and LightGBM, deployed as a real-time Streamlit prediction app.</div>
+    <div class="card-impact"><span class="stat-num">R² 0.9992</span><span class="stat-cap">achieved by XGBoost vs. 0.693 for the linear baseline</span></div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">PySpark</span><span class="tech-tag">MLlib</span><span class="tech-tag">HDFS</span></div>
+    <div class="card-tags"><span class="tech-tag">PySpark</span><span class="tech-tag alt">XGBoost</span><span class="tech-tag">Streamlit</span></div>
     <div class="card-links">
       <a class="card-link" href="https://github.com/nicolemas27/Social-Media-Engagement-Analysis" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
       <a class="card-link live" href="https://social-media-engagement-analysis.streamlit.app/" target="_blank">↗ Live</a>
     </div>
   </div>
 </div>
-<div class="project-card reveal" data-cats="nlp dl">
-  <div class="card-banner">
-    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <rect width="400" height="150" fill="#0c0a10"/>
-      <defs><linearGradient id="tcg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#b39ddb" stop-opacity=".2"/><stop offset="100%" stop-color="#f07878" stop-opacity=".1"/></linearGradient></defs>
-      <rect width="400" height="150" fill="url(#tcg)"/>
-      <!-- text blocks representing NLP -->
-      <rect x="20" y="30" width="180" height="12" rx="2" fill="#b39ddb" opacity=".15"/>
-      <rect x="20" y="48" width="140" height="12" rx="2" fill="#b39ddb" opacity=".12"/>
-      <rect x="20" y="66" width="160" height="12" rx="2" fill="#f07878" opacity=".3"/>
-      <text x="26" y="76" fill="#f07878" font-size="7" font-family="monospace" opacity=".6">toxic ← flagged</text>
-      <rect x="20" y="84" width="130" height="12" rx="2" fill="#b39ddb" opacity=".12"/>
-      <rect x="20" y="102" width="150" height="12" rx="2" fill="#b39ddb" opacity=".1"/>
-      <!-- ROC curve -->
-      <path d="M250,120 L250,30 L370,120 Z" fill="none" stroke="#3b82f6" stroke-width=".5" opacity=".2"/>
-      <path d="M250,120 Q270,90 290,75 Q315,58 340,42 L370,30" stroke="#b39ddb" stroke-width="2" fill="none" opacity=".7"/>
-      <text x="310" y="100" fill="#b39ddb" font-size="8" font-family="monospace" opacity=".5">ROC-AUC</text>
-      <text x="20" y="143" fill="#b39ddb" font-size="8" font-family="monospace" opacity=".4">BiGRU · Class imbalance · F1 / Precision / Recall</text>
-    </svg>
-    <div class="card-banner-overlay"></div>
-    <span class="card-type-badge nlp">NLP</span>
-    <span class="card-year">2023</span>
-  </div>
-  <div class="card-body">
-    <div class="card-title">Toxic Comment Classification (BiGRU)</div>
-    <div class="card-story">Raw messy text in, multi-label toxicity predictions out. Cleaning, tokenising, padding, embedding, BiGRU, the pipeline was straightforward; the hard part was the severe class imbalance, which weighted loss in training mostly fixed.<br><br>Reported precision, recall, F1, and ROC-AUC rather than just accuracy, since accuracy on an imbalanced dataset tells you almost nothing.</div>
-    <div class="card-impact">BiGRU with dropout regularisation · Weighted loss for class imbalance · Proper multi-metric evaluation</div>
-  </div>
-  <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">TensorFlow</span><span class="tech-tag">BiGRU</span><span class="tech-tag">NLTK</span><span class="tech-tag">scikit-learn</span></div>
-  </div>
-</div>
-
 <!-- 9. E-COMMERCE PIPELINE -->
-<div class="project-card reveal" data-cats="nlp dl">
-  <div class="card-banner">
-    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <rect width="400" height="150" fill="#0a0c10"/>
-      <defs><linearGradient id="tg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4ecdc4" stop-opacity=".2"/><stop offset="100%" stop-color="#5b8dee" stop-opacity=".1"/></linearGradient></defs>
-      <rect width="400" height="150" fill="url(#tg1)"/>
-      <text x="40" y="60" fill="#e8edf8" font-size="22" font-family="serif" opacity=".5">EN</text>
-      <text x="40" y="90" fill="#4ecdc4" font-size="12" font-family="monospace" opacity=".4">Hello</text>
-      <path d="M110,65 L170,65" stroke="#4ecdc4" stroke-width="1.5" opacity=".5"/>
-      <text x="135" y="58" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".6">Attention</text>
-      <rect x="170" y="45" width="60" height="45" rx="4" fill="none" stroke="#5b8dee" stroke-width="1" opacity=".5"/>
-      <text x="200" y="65" fill="#5b8dee" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">Trans-</text>
-      <text x="200" y="77" fill="#5b8dee" font-size="8" text-anchor="middle" font-family="monospace" opacity=".7">former</text>
-      <path d="M230,65 L280,65" stroke="#5b8dee" stroke-width="1.5" opacity=".5"/>
-      <text x="300" y="60" fill="#e8edf8" font-size="22" font-family="serif" opacity=".5">HI</text>
-      <text x="295" y="90" fill="#5b8dee" font-size="12" font-family="monospace" opacity=".4">नमस्ते</text>
-      <text x="20" y="130" fill="#4ecdc4" font-size="8" font-family="monospace" opacity=".4">Built from scratch · No HuggingFace · Outperforms LSTM</text>
-    </svg>
-    <div class="card-banner-overlay"></div>
-    <span class="card-type-badge nlp">NLP</span>
-    <span class="card-year">2024</span>
-  </div>
-  <div class="card-body">
-    <div class="card-title">Transformer for English–Hindi Translation</div>
-    <div class="card-story">I implemented the full Transformer architecture from scratch: encoder-decoder, multi-head self-attention, positional encoding, and feed-forward layers.<br><br>Partly to actually understand what's happening inside, partly to benchmark it properly against an LSTM seq2seq baseline. The Transformer wins clearly on long sentences, which is the whole point of the architecture.</div>
-    <div class="card-impact">Full encoder-decoder · Multi-head attention · Positional encoding</div>
-  </div>
-  <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">TensorFlow</span><span class="tech-tag">Multi-head Attention</span><span class="tech-tag">seq2seq</span></div>
-  </div>
-</div>
-
-<!-- 7. WAVENET GAN -->
-<div class="project-card reveal" data-cats="data-eng fullstack">
-  <div class="card-banner">
-    <svg viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <rect width="400" height="150" fill="#0a0e0a"/>
-      <defs><linearGradient id="epg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6" stop-opacity=".2"/><stop offset="100%" stop-color="#58d68d" stop-opacity=".1"/></linearGradient></defs>
-      <rect width="400" height="150" fill="url(#epg)"/>
-      <!-- pipeline flow -->
-      <rect x="15" y="50" width="65" height="38" rx="3" fill="none" stroke="#3b82f6" stroke-width="1" opacity=".5"/>
-      <text x="47" y="65" fill="#3b82f6" font-size="7" text-anchor="middle" font-family="monospace" opacity=".7">Selenium</text>
-      <text x="47" y="78" fill="#3b82f6" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">JS pages</text>
-      <line x1="80" y1="69" x2="100" y2="69" stroke="#3b82f6" stroke-width="1" opacity=".5"/>
-      <rect x="100" y="50" width="65" height="38" rx="3" fill="none" stroke="#4ecdc4" stroke-width="1" opacity=".5"/>
-      <text x="132" y="65" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".7">BS4 parse</text>
-      <text x="132" y="78" fill="#4ecdc4" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">+ clean</text>
-      <line x1="165" y1="69" x2="185" y2="69" stroke="#4ecdc4" stroke-width="1" opacity=".5"/>
-      <rect x="185" y="50" width="70" height="38" rx="3" fill="none" stroke="#5b8dee" stroke-width="1" opacity=".5"/>
-      <text x="220" y="65" fill="#5b8dee" font-size="7" text-anchor="middle" font-family="monospace" opacity=".7">Transform</text>
-      <text x="220" y="78" fill="#5b8dee" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">per site</text>
-      <line x1="255" y1="69" x2="275" y2="69" stroke="#5b8dee" stroke-width="1" opacity=".5"/>
-      <rect x="275" y="50" width="80" height="38" rx="3" fill="none" stroke="#58d68d" stroke-width="1" opacity=".5"/>
-      <text x="315" y="65" fill="#58d68d" font-size="7" text-anchor="middle" font-family="monospace" opacity=".7">Django REST</text>
-      <text x="315" y="78" fill="#58d68d" font-size="7" text-anchor="middle" font-family="monospace" opacity=".5">API endpoints</text>
-      <text x="15" y="130" fill="#3b82f6" font-size="7" font-family="monospace" opacity=".4">Amazon · Flipkart · Myntra — extensible design</text>
-    </svg>
-    <div class="card-banner-overlay"></div>
-    <span class="card-type-badge data-eng">Data Engineering</span>
-    <span class="card-year">2023 – 2024</span>
-  </div>
-  <div class="card-body">
-    <div class="card-title">E-Commerce Data Pipeline: Scraper + REST API</div>
-    <div class="card-story">Scraped product data from Amazon, Flipkart, and Myntra. Selenium handles JS-rendered pages, BeautifulSoup does the parsing, and each site has its own class for cleaning since each site's structure is different.<br><br>Exposed through a Django REST API with endpoints for each platform.</div>
-    <div class="card-impact">Scraping · Cleaning · Visualisation · Exposed via Django REST API</div>
-  </div>
-  <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">Selenium</span><span class="tech-tag">BeautifulSoup</span><span class="tech-tag">Django REST</span><span class="tech-tag">SQLite</span></div>
-  </div>
-</div>
-
 <!-- 10. CYPHER -->
 <div class="project-card reveal" data-cats="gen-ai fullstack">
   <div class="card-banner">
@@ -972,7 +828,6 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <rect width="400" height="150" fill="#090b0f"/>
       <defs><linearGradient id="cyg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#b39ddb" stop-opacity=".25"/><stop offset="100%" stop-color="#5b8dee" stop-opacity=".1"/></linearGradient></defs>
       <rect width="400" height="150" fill="url(#cyg)"/>
-      <!-- soundwave / voice waveform -->
       <g opacity=".5" stroke="#b39ddb" stroke-width="1.5" stroke-linecap="round">
         <line x1="30" y1="75" x2="30" y2="75"/><line x1="45" y1="65" x2="45" y2="85"/><line x1="60" y1="50" x2="60" y2="100"/>
         <line x1="75" y1="40" x2="75" y2="110"/><line x1="90" y1="55" x2="90" y2="95"/>
@@ -981,7 +836,6 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
         <line x1="165" y1="48" x2="165" y2="102"/><line x1="180" y1="55" x2="180" y2="95"/>
         <line x1="195" y1="68" x2="195" y2="82"/>
       </g>
-      <!-- command text -->
       <rect x="220" y="45" width="160" height="20" rx="3" fill="#0f1420" opacity=".8"/>
       <text x="230" y="58" fill="#b39ddb" font-size="8" font-family="monospace" opacity=".8">▶ "open browser"</text>
       <rect x="220" y="72" width="150" height="20" rx="3" fill="#0f1420" opacity=".8"/>
@@ -997,10 +851,10 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="card-body">
     <div class="card-title">Cypher — Desktop Voice Assistant</div>
     <div class="card-story">Desktop voice assistant packaged as a standalone .exe, no Python install needed. Voice commands trigger document creation, web search, screenshots, and system tasks. Gemini API handles the natural language understanding.</div>
-    <div class="card-impact">Zero-install .exe via PyInstaller · Voice-triggered system automation</div>
+    <div class="card-impact-text"><span class="impact-kicker">Key detail</span>One voice interface covers four different task types — documents, search, screenshots, and system commands — instead of a single-purpose skill.</div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">Gemini API</span><span class="tech-tag">SpeechRecognition</span><span class="tech-tag">Tkinter</span><span class="tech-tag">PyInstaller</span></div>
+    <div class="card-tags"><span class="tech-tag">Gemini API</span><span class="tech-tag alt">SpeechRecognition</span><span class="tech-tag">Tkinter</span><span class="tech-tag alt">PyInstaller</span></div>
     <div class="card-links">
       <a class="card-link" href="https://github.com/nicolemas27/Cypher-Desktop-Voice-Assistant" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
     </div>
@@ -1014,7 +868,6 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <rect width="400" height="150" fill="#080c10"/>
       <defs><radialGradient id="drg" cx="50%" cy="50%"><stop offset="0%" stop-color="#4ecdc4" stop-opacity=".2"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
       <rect width="400" height="150" fill="url(#drg)"/>
-      <!-- drone top view -->
       <g transform="translate(80,75)" opacity=".6">
         <line x1="-35" y1="-35" x2="35" y2="35" stroke="#4ecdc4" stroke-width="2"/>
         <line x1="35" y1="-35" x2="-35" y2="35" stroke="#4ecdc4" stroke-width="2"/>
@@ -1024,7 +877,6 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
         <circle cx="35" cy="35" r="10" fill="none" stroke="#4ecdc4" stroke-width="1.5"/>
         <rect x="-8" y="-8" width="16" height="16" rx="2" fill="#4ecdc4" opacity=".4"/>
       </g>
-      <!-- detection box -->
       <rect x="240" y="30" width="80" height="60" fill="none" stroke="#f07878" stroke-width="1.5" opacity=".7" stroke-dasharray="4,3"/>
       <text x="244" y="44" fill="#f07878" font-size="7" font-family="monospace" opacity=".7">person</text>
       <text x="244" y="56" fill="#f07878" font-size="7" font-family="monospace" opacity=".5">conf: 0.91</text>
@@ -1038,10 +890,10 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="card-body">
     <div class="card-title">Autonomous Drone Surveillance System</div>
     <div class="card-story">Built as part of my college drone club's entry into the SAEINDIA Aerothon. I was responsible for the object detection and tracking system: the drone's camera feed goes into SSD MobileNet for inference, then a centroid tracker assigns stable IDs to detected objects across frames.<br><br>The tracker compares each centroid to the frame centre to determine where the target is relative to the drone.</div>
-    <div class="card-impact">Object detection via SSD MobileNet · Centroid tracking with stable IDs across frames</div>
+    <div class="card-impact"><span class="stat-num">91%</span><span class="stat-cap">detection confidence, tracked with stable IDs across frames via centroid tracking</span></div>
   </div>
   <div class="card-foot">
-    <div class="card-tags"><span class="tech-tag">TFLite</span><span class="tech-tag">OpenCV</span><span class="tech-tag">Raspberry Pi</span></div>
+    <div class="card-tags"><span class="tech-tag">TFLite</span><span class="tech-tag alt">OpenCV</span><span class="tech-tag">Raspberry Pi</span></div>
     <div class="card-links">
       <a class="card-link" href="https://github.com/nicolemas27/drone-surveillance" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C9.525 9.675 8.736 9.305 8.736 9.305c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>GitHub</a>
     </div>
@@ -1057,6 +909,23 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
   <div class="section-kicker">Experience</div>
   <h2 class="section-title">Internships</h2>
   <div class="exp-grid">
+    <div class="exp-item reveal">
+      <div class="exp-left"><div class="exp-period">2026 · 2-week engagement</div></div>
+      <div class="exp-right">
+        <div class="exp-header">
+          <div class="exp-role-block">
+            <div class="exp-role">AI Strategy Consultant</div>
+            <div class="exp-org">Planily, via Practera Industry Projects (Remote)</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Co-authored an integrated AI strategy, marketing, and product report for Planily, a UK-based AI family organiser startup, as part of a 6-person team.</li>
+          <li>Proposed an <strong>AI routing framework</strong> (rules → retrieval → small model → large model → human review) balancing cost and trust as the product scales.</li>
+          <li>Modelled AI infrastructure costs across <strong>50–1,000 family growth milestones</strong>, comparing paid LLM APIs against self-hosted models to identify the most cost-effective path for the pilot stage.</li>
+          <li>Recommended privacy-by-design as a core marketing differentiator, aligned with UK GDPR and the ICO's Children's Code, and presented a 3-year AI roadmap to startup stakeholders.</li>
+        </ul>
+      </div>
+    </div>
     <div class="exp-item reveal">
       <div class="exp-left"><div class="exp-period">Feb – Jun 2025</div></div>
       <div class="exp-right">
@@ -1163,11 +1032,35 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
       <span class="edu-badge">First Class Honours</span>
     </div>
   </div>
-  <div class="awards-row reveal">
-    <div class="award-chip"><span>🥇</span>1st Place, Our-Research HR Act (DEI), 2022</div>
-    <div class="award-chip"><span>🥈</span>1st Runner-up, HR On-Boarding Role-play, 2023</div>
-    <div class="award-chip"><span>♟</span>1st Place, Chess (Intra & Inter-College, multiple years)</div>
-    <div class="award-chip"><span>🚁</span>Vice-Captain · College Drone Club</div>
+  <div class="awards-grid reveal">
+    <div class="award-card" style="--aw-color:#5b8dee">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z"/><path d="M7 5H4a1 1 0 0 0-1 1 5 5 0 0 0 4 4.9M17 5h3a1 1 0 0 1 1 1 5 5 0 0 1-4 4.9"/></svg>
+      <div>
+        <div class="award-card-title">1st Place, Our-Research HR Act</div>
+        <div class="award-card-meta">2022</div>
+      </div>
+    </div>
+    <div class="award-card" style="--aw-color:#06b6d4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.7 9.7 0 0 1-4-.85L3 20l1.05-3.15A7.9 7.9 0 0 1 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8Z"/></svg>
+      <div>
+        <div class="award-card-title">1st Runner-up, HR On-Boarding</div>
+        <div class="award-card-meta">2023</div>
+      </div>
+    </div>
+    <div class="award-card" style="--aw-color:#b39ddb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-1.1 0-2 1-2 2 0 .7.35 1.3.9 1.65L9.5 10h5l-1.4-3.35C13.65 6.3 14 5.7 14 5c0-1-.9-2-2-2Z"/><path d="M9 10h6l1 6H8l1-6Z"/><path d="M6 21l1.5-4h9L18 21H6Z"/></svg>
+      <div>
+        <div class="award-card-title">1st Place, Chess</div>
+        <div class="award-card-meta">Intra & inter-college</div>
+      </div>
+    </div>
+    <div class="award-card" style="--aw-color:#58d68d">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>
+      <div>
+        <div class="award-card-title">Vice-Captain</div>
+        <div class="award-card-meta">College Drone Club</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1256,20 +1149,16 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);background:var(--bg)
 </footer>
 
 <script>
-// Mobile nav
 const tog=document.getElementById('nav-toggle'),nl=document.querySelector('.nav-links');
 tog.addEventListener('click',()=>{tog.classList.toggle('open');nl.classList.toggle('open');});
 nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{tog.classList.remove('open');nl.classList.remove('open');}));
-// Featured
 const fg=document.getElementById('featuredGrid'),pg=document.getElementById('projectsGrid');
 ['dissertation','fraud','learning','rag'].forEach(slug=>{
   const c=pg.querySelector(`[data-slug="${slug}"]`);
   if(c){const cl=c.cloneNode(true);cl.classList.add('featured-hero');cl.removeAttribute('data-slug');fg.appendChild(cl);c.style.display='none';}
 });
-// Reveal
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-// Filter
 document.querySelectorAll('.filter-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
